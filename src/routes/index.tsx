@@ -321,12 +321,12 @@ function About() {
 
 /* ---------------- FEATURED CAKES ---------------- */
 const CAKES = [
-  { img: cakeWedding, name: "Wedding Cakes", tag: "Elegant & Timeless", price: "From ₹12,000" },
-  { img: cakeBirthday, name: "Birthday Cakes", tag: "Make Every Wish Special", price: "From ₹2,800" },
-  { img: cakeLuxury, name: "Luxury Cakes", tag: "Opulent & Exclusive", price: "From ₹9,500" },
-  { img: cakeCupcakes, name: "Cupcakes", tag: "Sweet Little Delights", price: "From ₹120" },
-  { img: cakeMacarons, name: "Macarons", tag: "Delicate & Flavourful", price: "From ₹90" },
-  { img: cakeDessert, name: "Desserts", tag: "Indulge in Happiness", price: "From ₹450" },
+  { img: cakeWedding, name: "Wedding Cakes", tag: "Elegant & Timeless", price: "From ₹25,000" },
+  { img: cakeBirthday, name: "Birthday Cakes", tag: "Make Every Wish Special", price: "From ₹3,500" },
+  { img: cakeLuxury, name: "Luxury Cakes", tag: "Opulent & Exclusive", price: "From ₹18,000" },
+  { img: cakeCupcakes, name: "Cupcakes", tag: "Sweet Little Delights", price: "From ₹150 / pc" },
+  { img: cakeMacarons, name: "Macarons", tag: "Delicate & Flavourful", price: "From ₹120 / pc" },
+  { img: cakeDessert, name: "Desserts", tag: "Indulge in Happiness", price: "From ₹550" },
 ];
 
 function FeaturedCakes() {
