@@ -321,12 +321,12 @@ function About() {
 
 /* ---------------- FEATURED CAKES ---------------- */
 const CAKES = [
-  { img: cakeWedding, name: "Wedding Cakes", tag: "Elegant & Timeless", price: "From AED 1,200" },
-  { img: cakeBirthday, name: "Birthday Cakes", tag: "Make Every Wish Special", price: "From AED 280" },
-  { img: cakeLuxury, name: "Luxury Cakes", tag: "Opulent & Exclusive", price: "From AED 950" },
-  { img: cakeCupcakes, name: "Cupcakes", tag: "Sweet Little Delights", price: "From AED 12" },
-  { img: cakeMacarons, name: "Macarons", tag: "Delicate & Flavourful", price: "From AED 9" },
-  { img: cakeDessert, name: "Desserts", tag: "Indulge in Happiness", price: "From AED 45" },
+  { img: cakeWedding, name: "Wedding Cakes", tag: "Elegant & Timeless", price: "From ₹12,000" },
+  { img: cakeBirthday, name: "Birthday Cakes", tag: "Make Every Wish Special", price: "From ₹2,800" },
+  { img: cakeLuxury, name: "Luxury Cakes", tag: "Opulent & Exclusive", price: "From ₹9,500" },
+  { img: cakeCupcakes, name: "Cupcakes", tag: "Sweet Little Delights", price: "From ₹120" },
+  { img: cakeMacarons, name: "Macarons", tag: "Delicate & Flavourful", price: "From ₹90" },
+  { img: cakeDessert, name: "Desserts", tag: "Indulge in Happiness", price: "From ₹450" },
 ];
 
 function FeaturedCakes() {
@@ -619,7 +619,7 @@ function InstagramFeed() {
 const FAQS = [
   { q: "How far in advance should I order?", a: "For wedding cakes we recommend 4–6 weeks. Bespoke birthday cakes need 7–10 days; smaller orders can often be accommodated within 48 hours." },
   { q: "Do you offer eggless and dietary options?", a: "Yes — eggless, gluten-conscious and vegan recipes are available across the menu, with no compromise on flavour or finish." },
-  { q: "Do you deliver across the UAE?", a: "We deliver to Dubai, Abu Dhabi and Sharjah. Larger tiered cakes are hand-delivered and assembled on-site by our team." },
+  { q: "Do you deliver across Kerala?", a: "We deliver across Kannur, Thalassery, Kozhikode and most of north Kerala. Larger tiered cakes are hand-delivered and assembled on-site by our team." },
   { q: "Can I commission a fully custom design?", a: "Every cake we make is custom. Bring a mood board, a fabric swatch, a memory — we'll translate it into edible form." },
   { q: "What is your pricing structure?", a: "Pricing depends on size, complexity and finish. After a brief consultation we provide a detailed quotation with no hidden costs." },
 ];
@@ -677,8 +677,8 @@ function Contact() {
         <div className="grid lg:grid-cols-[1fr_1.1fr] gap-10">
           <div className="space-y-5">
             {[
-              { icon: MapPin, label: "Atelier", value: "Jumeirah, Dubai — UAE" },
-              { icon: Phone, label: "Call", value: "+971 50 123 4567" },
+              { icon: MapPin, label: "Atelier", value: "Fort Road, Kannur — Kerala, India" },
+              { icon: Phone, label: "Call", value: "+91 98765 43210" },
               { icon: Mail, label: "Email", value: "hello@ayishaz.cakery" },
               { icon: Clock, label: "Hours", value: "Tue – Sun · 10:00 – 20:00" },
             ].map((c) => (
@@ -712,7 +712,7 @@ function Contact() {
           <form onSubmit={(e) => e.preventDefault()} className="glass-cream rounded-3xl p-8 md:p-10 text-[var(--espresso)] space-y-5 shadow-[var(--shadow-luxe)]">
             <div className="grid sm:grid-cols-2 gap-5">
               <Field label="Your Name" placeholder="Layla Hassan" />
-              <Field label="Phone" placeholder="+971 50 000 0000" />
+              <Field label="Phone" placeholder="+91 98765 00000" />
             </div>
             <Field label="Email" type="email" placeholder="you@email.com" />
             <Field label="Occasion" placeholder="Wedding · Birthday · Corporate" />
@@ -752,7 +752,7 @@ function Footer() {
             </div>
             <p className="text-cream/55 leading-relaxed max-w-sm">
               A luxury cake atelier crafting edible art for life's most cherished occasions.
-              Handmade in Dubai since 2012.
+              Handmade in Kannur since 2012.
             </p>
           </div>
           {[
@@ -773,7 +773,7 @@ function Footer() {
         <div className="gold-hairline mb-8" />
         <div className="flex flex-wrap items-center justify-between gap-4 text-xs text-cream/45">
           <p>© {new Date().getFullYear()} Ayishaz Cakery. All rights reserved.</p>
-          <p className="tracking-[0.2em] uppercase">Handcrafted with <Heart className="inline w-3 h-3 text-[var(--gold)] fill-current" /> in Dubai</p>
+          <p className="tracking-[0.2em] uppercase">Handcrafted with <Heart className="inline w-3 h-3 text-[var(--gold)] fill-current" /> in Kannur</p>
         </div>
       </div>
     </footer>
