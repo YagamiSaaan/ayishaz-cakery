@@ -611,7 +611,9 @@ function InstagramFeed() {
         <div className="grid grid-cols-2 md:grid-cols-6 gap-3">
           {IG.map((src, i) => (
             <motion.a
-              href="#"
+              href={INSTAGRAM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               key={i}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -619,7 +621,7 @@ function InstagramFeed() {
               transition={{ duration: 0.5, delay: i * 0.06 }}
               className="relative aspect-square overflow-hidden rounded-2xl group"
             >
-              <img src={src} alt="" loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+              <img src={src} alt="Instagram post by Ayishaz Cakery" loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
               <div className="absolute inset-0 bg-[var(--espresso)]/0 group-hover:bg-[var(--espresso)]/60 flex items-center justify-center transition">
                 <Instagram className="w-5 h-5 text-[var(--gold)] opacity-0 group-hover:opacity-100 transition" />
               </div>
