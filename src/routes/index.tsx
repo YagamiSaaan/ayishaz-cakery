@@ -783,11 +783,11 @@ function Contact() {
   );
 }
 
-function Field({ label, type = "text", placeholder }: { label: string; type?: string; placeholder?: string }) {
+function Field({ label, type = "text", placeholder, name, required }: { label: string; type?: string; placeholder?: string; name?: string; required?: boolean }) {
   return (
     <div>
       <label className="text-[0.65rem] tracking-[0.3em] uppercase text-[var(--mocha)] mb-2 block">{label}</label>
-      <input type={type} placeholder={placeholder} className="w-full bg-transparent border-b border-[var(--mocha)]/30 py-3 focus:outline-none focus:border-[var(--gold)] placeholder:text-[var(--mocha)]/40" />
+      <input name={name} required={required} type={type} placeholder={placeholder} className="w-full bg-transparent border-b border-[var(--mocha)]/30 py-3 focus:outline-none focus:border-[var(--gold)] placeholder:text-[var(--mocha)]/40" />
     </div>
   );
 }
