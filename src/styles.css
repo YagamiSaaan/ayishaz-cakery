@@ -200,3 +200,7 @@
 @utility animate-float-slow { animation: float-slow 8s ease-in-out infinite; }
 @utility animate-float-slower { animation: float-slower 12s ease-in-out infinite; }
 @utility animate-spin-slow { animation: spin-slow 40s linear infinite; }
+
+html { scroll-behavior: smooth; }
+section[id] { scroll-margin-top: 80px; }
+
