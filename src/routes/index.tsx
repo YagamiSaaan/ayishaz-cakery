@@ -44,6 +44,20 @@ const NAV = [
   { label: "Contact", href: "#contact" },
 ];
 
+const PHONE_DISPLAY = "+91 98765 43210";
+const PHONE_TEL = "+919876543210";
+const WHATSAPP_NUMBER = "919876543210";
+const WHATSAPP_MESSAGE = encodeURIComponent(
+  "Hi Ayishaz Cakery! I'd like to place an order. Could you share availability and pricing?"
+);
+const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MESSAGE}`;
+const EMAIL = "hello@ayishazcakery.com";
+const EMAIL_URL = `mailto:${EMAIL}?subject=${encodeURIComponent("Cake Enquiry")}`;
+const INSTAGRAM_URL = "https://instagram.com/ayishaz.cakery";
+const FACEBOOK_URL = "https://facebook.com/ayishazcakery";
+const ADDRESS = "Fort Road, Kannur — Kerala, India";
+const MAPS_URL = "https://www.google.com/maps/search/?api=1&query=Fort+Road+Kannur+Kerala";
+
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
   show: { opacity: 1, y: 0, transition: { duration: 0.9, ease: [0.2, 0.8, 0.2, 1] as const } },
