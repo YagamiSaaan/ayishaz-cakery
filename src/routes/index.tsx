@@ -179,10 +179,10 @@ function Hero() {
             transition={{ delay: 0.5 }}
             className="mt-10 flex flex-wrap gap-4"
           >
-            <a href="#cakes" className="btn-luxe btn-luxe-hover">
-              Our Creations <ArrowRight className="w-4 h-4" />
+            <a href="#gallery" className="btn-luxe btn-luxe-hover">
+              View Gallery <ArrowRight className="w-4 h-4" />
             </a>
-            <a href="#contact" className="btn-ghost-luxe hover:bg-[rgba(212,175,55,0.08)]">
+            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn-ghost-luxe hover:bg-[rgba(212,175,55,0.08)]">
               <MessageCircle className="w-4 h-4" /> Chat on WhatsApp
             </a>
           </motion.div>
