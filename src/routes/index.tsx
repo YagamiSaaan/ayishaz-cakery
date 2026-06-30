@@ -695,48 +695,83 @@ function Contact() {
         <div className="grid lg:grid-cols-[1fr_1.1fr] gap-10">
           <div className="space-y-5">
             {[
-              { icon: MapPin, label: "Atelier", value: "Fort Road, Kannur — Kerala, India" },
-              { icon: Phone, label: "Call", value: "+91 98765 43210" },
-              { icon: Mail, label: "Email", value: "hello@ayishaz.cakery" },
-              { icon: Clock, label: "Hours", value: "Tue – Sun · 10:00 – 20:00" },
-            ].map((c) => (
-              <div key={c.label} className="glass-card rounded-2xl p-6 flex items-center gap-5">
-                <div className="w-12 h-12 rounded-full bg-[var(--espresso)] flex items-center justify-center border border-[rgba(212,175,55,0.25)] shrink-0">
-                  <c.icon className="w-4 h-4 text-[var(--gold)]" />
-                </div>
-                <div>
-                  <p className="text-[0.65rem] tracking-[0.3em] uppercase text-[var(--caramel)] mb-1">{c.label}</p>
-                  <p className="text-cream">{c.value}</p>
-                </div>
-              </div>
-            ))}
+              { icon: MapPin, label: "Atelier", value: ADDRESS, href: MAPS_URL, external: true },
+              { icon: Phone, label: "Call", value: PHONE_DISPLAY, href: `tel:${PHONE_TEL}` },
+              { icon: Mail, label: "Email", value: EMAIL, href: EMAIL_URL },
+              { icon: Clock, label: "Hours", value: "Tue – Sun · 10:00 – 20:00", href: null as string | null },
+            ].map((c) => {
+              const inner = (
+                <>
+                  <div className="w-12 h-12 rounded-full bg-[var(--espresso)] flex items-center justify-center border border-[rgba(212,175,55,0.25)] shrink-0">
+                    <c.icon className="w-4 h-4 text-[var(--gold)]" />
+                  </div>
+                  <div>
+                    <p className="text-[0.65rem] tracking-[0.3em] uppercase text-[var(--caramel)] mb-1">{c.label}</p>
+                    <p className="text-cream">{c.value}</p>
+                  </div>
+                </>
+              );
+              const className = "glass-card rounded-2xl p-6 flex items-center gap-5 hover:border-[rgba(212,175,55,0.4)] transition";
+              return c.href ? (
+                <a
+                  key={c.label}
+                  href={c.href}
+                  {...(c.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                  className={className}
+                >
+                  {inner}
+                </a>
+              ) : (
+                <div key={c.label} className={className}>{inner}</div>
+              );
+            })}
             <div className="rounded-2xl overflow-hidden border border-[rgba(212,175,55,0.18)] aspect-[16/9]">
               <iframe
-                title="Map"
-                src="https://www.openstreetmap.org/export/embed.html?bbox=55.235%2C25.21%2C55.27%2C25.24&layer=mapnik"
+                title="Ayishaz Cakery — Kannur location map"
+                src="https://www.openstreetmap.org/export/embed.html?bbox=75.355%2C11.860%2C75.385%2C11.880&layer=mapnik&marker=11.870%2C75.370"
                 className="w-full h-full grayscale contrast-125 opacity-80"
                 loading="lazy"
               />
             </div>
             <div className="flex gap-3 pt-2">
-              {[Instagram, Facebook, MessageCircle].map((Icon, i) => (
-                <a key={i} href="#" className="w-11 h-11 rounded-full border border-[rgba(212,175,55,0.3)] flex items-center justify-center text-cream/80 hover:bg-[var(--gold)] hover:text-[var(--espresso)] transition" aria-label="Social">
+              {[
+                { Icon: Instagram, href: INSTAGRAM_URL, label: "Instagram" },
+                { Icon: Facebook, href: FACEBOOK_URL, label: "Facebook" },
+                { Icon: MessageCircle, href: WHATSAPP_URL, label: "WhatsApp" },
+              ].map(({ Icon, href, label }) => (
+                <a key={label} href={href} target="_blank" rel="noopener noreferrer" className="w-11 h-11 rounded-full border border-[rgba(212,175,55,0.3)] flex items-center justify-center text-cream/80 hover:bg-[var(--gold)] hover:text-[var(--espresso)] transition" aria-label={label}>
                   <Icon className="w-4 h-4" />
                 </a>
               ))}
             </div>
           </div>
 
-          <form onSubmit={(e) => e.preventDefault()} className="glass-cream rounded-3xl p-8 md:p-10 text-[var(--espresso)] space-y-5 shadow-[var(--shadow-luxe)]">
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              const form = e.currentTarget;
+              const data = new FormData(form);
+              const name = String(data.get("name") || "");
+              const phone = String(data.get("phone") || "");
+              const email = String(data.get("email") || "");
+              const occasion = String(data.get("occasion") || "");
+              const message = String(data.get("message") || "");
+              const text = encodeURIComponent(
+                `Hi Ayishaz Cakery!%0A%0AName: ${name}%0APhone: ${phone}%0AEmail: ${email}%0AOccasion: ${occasion}%0A%0A${message}`
+              );
+              window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${text}`, "_blank", "noopener,noreferrer");
+            }}
+            className="glass-cream rounded-3xl p-8 md:p-10 text-[var(--espresso)] space-y-5 shadow-[var(--shadow-luxe)]"
+          >
             <div className="grid sm:grid-cols-2 gap-5">
-              <Field label="Your Name" placeholder="Layla Hassan" />
-              <Field label="Phone" placeholder="+91 98765 00000" />
+              <Field name="name" label="Your Name" placeholder="Layla Hassan" required />
+              <Field name="phone" label="Phone" placeholder="+91 98765 00000" />
             </div>
-            <Field label="Email" type="email" placeholder="you@email.com" />
-            <Field label="Occasion" placeholder="Wedding · Birthday · Corporate" />
+            <Field name="email" label="Email" type="email" placeholder="you@email.com" required />
+            <Field name="occasion" label="Occasion" placeholder="Wedding · Birthday · Corporate" />
             <div>
               <label className="text-[0.65rem] tracking-[0.3em] uppercase text-[var(--mocha)] mb-2 block">Tell Us About Your Vision</label>
-              <textarea rows={5} placeholder="Mood, palette, size, date…" className="w-full bg-transparent border-b border-[var(--mocha)]/30 py-3 focus:outline-none focus:border-[var(--gold)] resize-none placeholder:text-[var(--mocha)]/40" />
+              <textarea name="message" rows={5} placeholder="Mood, palette, size, date…" className="w-full bg-transparent border-b border-[var(--mocha)]/30 py-3 focus:outline-none focus:border-[var(--gold)] resize-none placeholder:text-[var(--mocha)]/40" />
             </div>
             <button type="submit" className="btn-luxe btn-luxe-hover w-full justify-center mt-3 !bg-[var(--espresso)] !text-[var(--cream)]">
               Send Enquiry <ArrowRight className="w-4 h-4" />
