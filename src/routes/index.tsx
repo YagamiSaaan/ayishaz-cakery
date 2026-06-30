@@ -120,7 +120,9 @@ function Nav({ scrolled }: { scrolled: boolean }) {
           ))}
         </nav>
         <a
-          href="#contact"
+          href={WHATSAPP_URL}
+          target="_blank"
+          rel="noopener noreferrer"
           className="btn-luxe btn-luxe-hover hidden md:inline-flex !py-3 !px-6 !text-[0.72rem]"
         >
           Order Now <ArrowRight className="w-3.5 h-3.5" />
