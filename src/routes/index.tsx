@@ -809,15 +809,47 @@ function Footer() {
             </p>
           </div>
           {[
-            { title: "Explore", items: ["About", "Cakes", "Gallery", "Process"] },
-            { title: "Studio", items: ["Wedding Cakes", "Birthday", "Macarons", "Chocolates"] },
-            { title: "Contact", items: ["Atelier", "Email", "WhatsApp", "Instagram"] },
+            {
+              title: "Explore",
+              items: [
+                { label: "About", href: "#about", external: false },
+                { label: "Cakes", href: "#cakes", external: false },
+                { label: "Gallery", href: "#gallery", external: false },
+                { label: "Process", href: "#process", external: false },
+              ],
+            },
+            {
+              title: "Studio",
+              items: [
+                { label: "Wedding Cakes", href: "#cakes", external: false },
+                { label: "Birthday", href: "#cakes", external: false },
+                { label: "Macarons", href: "#cakes", external: false },
+                { label: "Testimonials", href: "#testimonials", external: false },
+              ],
+            },
+            {
+              title: "Contact",
+              items: [
+                { label: "Atelier", href: MAPS_URL, external: true },
+                { label: "Email", href: EMAIL_URL, external: false },
+                { label: "WhatsApp", href: WHATSAPP_URL, external: true },
+                { label: "Instagram", href: INSTAGRAM_URL, external: true },
+              ],
+            },
           ].map((col) => (
             <div key={col.title}>
               <p className="text-[0.7rem] tracking-[0.3em] uppercase text-[var(--gold)] mb-5">{col.title}</p>
               <ul className="space-y-3">
                 {col.items.map((i) => (
-                  <li key={i}><a href="#" className="text-cream/70 hover:text-[var(--gold)] transition text-sm">{i}</a></li>
+                  <li key={i.label}>
+                    <a
+                      href={i.href}
+                      {...(i.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                      className="text-cream/70 hover:text-[var(--gold)] transition text-sm"
+                    >
+                      {i.label}
+                    </a>
+                  </li>
                 ))}
               </ul>
             </div>
