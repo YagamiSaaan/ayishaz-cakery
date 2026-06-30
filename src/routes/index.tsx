@@ -604,7 +604,7 @@ function InstagramFeed() {
             <div className="eyebrow mb-5"><Instagram className="w-3.5 h-3.5" /> @ayishaz.cakery</div>
             <h2 className="text-4xl md:text-5xl leading-[1.05]">Follow the <span className="font-script italic text-gold-gradient">Atelier</span></h2>
           </div>
-          <a href="#" className="btn-ghost-luxe hover:bg-[rgba(212,175,55,0.08)]">
+          <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className="btn-ghost-luxe hover:bg-[rgba(212,175,55,0.08)]">
             <Instagram className="w-4 h-4" /> Follow on Instagram
           </a>
         </motion.div>
