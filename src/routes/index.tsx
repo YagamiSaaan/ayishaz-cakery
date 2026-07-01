@@ -83,7 +83,36 @@ export const Route = createFileRoute("/")({
     ],
   }),
   component: Index,
+  errorComponent: IndexErrorComponent,
 });
+
+function IndexErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
+  const router = useRouter();
+  useEffect(() => {
+    console.error("Index route error:", error);
+  }, [error]);
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-[var(--espresso)] text-cream px-6">
+      <div className="max-w-md text-center">
+        <p className="eyebrow justify-center mb-5"><Sparkles className="w-3.5 h-3.5" /> Something went wrong</p>
+        <h1 className="text-3xl md:text-4xl font-serif mb-4">We couldn't load this page</h1>
+        <p className="text-cream/70 text-sm mb-8">
+          A small hiccup on our end. You can try again or reach us directly and we'll help right away.
+        </p>
+        <div className="flex flex-wrap justify-center gap-3">
+          <button
+            onClick={() => { router.invalidate(); reset(); }}
+            className="btn-luxe btn-luxe-hover !py-3 !px-6 !text-[0.72rem]"
+          >
+            Try again
+          </button>
+          <Link to="/" className="btn-ghost-luxe hover:bg-[rgba(212,175,55,0.08)]">Go home</Link>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 
 
 const fadeUp = {
