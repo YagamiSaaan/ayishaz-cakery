@@ -6,7 +6,6 @@
 const WORDS = [
   "Bespoke",
   "Handcrafted",
-  "Kannur, Kerala",
   "Since 2012",
   "Award Winning",
   "Edible Art",
