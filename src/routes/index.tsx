@@ -126,6 +126,11 @@ export const Route = createFileRoute("/")({
   errorComponent: IndexErrorComponent,
 });
 
+/**
+ * Landing page composition. Sections are declared in visual (scroll) order.
+ * `overflow-x-clip` on the outer wrapper prevents horizontal scrollbars
+ * caused by decorative absolutely-positioned motion elements.
+ */
 function Index() {
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-clip">
