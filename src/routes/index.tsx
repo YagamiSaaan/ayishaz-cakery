@@ -502,10 +502,10 @@ function Lightbox({ src, onClose }: { src: string; onClose: () => void }) {
   }, [onClose]);
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="fixed inset-0 z-[100] bg-[var(--espresso)]/95 backdrop-blur-xl flex items-center justify-center p-4" onClick={onClose}>
-      <button className="absolute top-6 right-6 w-12 h-12 rounded-full border border-[rgba(212,175,55,0.3)] flex items-center justify-center text-cream hover:bg-[var(--gold)] hover:text-[var(--espresso)] transition" aria-label="Close">
+      <button onClick={onClose} className="absolute top-6 right-6 w-12 h-12 rounded-full border border-[rgba(212,175,55,0.3)] flex items-center justify-center text-cream hover:bg-[var(--gold)] hover:text-[var(--espresso)] transition" aria-label="Close">
         <X className="w-5 h-5" />
       </button>
-      <motion.img initial={{ scale: 0.95 }} animate={{ scale: 1 }} src={src} alt="" className="max-w-[90vw] max-h-[88vh] object-contain rounded-2xl shadow-[var(--shadow-luxe)]" />
+      <motion.img onClick={(e) => e.stopPropagation()} initial={{ scale: 0.95 }} animate={{ scale: 1 }} src={src} alt="" className="max-w-[90vw] max-h-[88vh] object-contain rounded-2xl shadow-[var(--shadow-luxe)]" />
     </motion.div>
   );
 }
