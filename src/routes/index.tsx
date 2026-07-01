@@ -165,16 +165,18 @@ function Index() {
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-clip">
       <Nav />
-      <Hero />
-      <About />
-      <FeaturedCakes />
-      <Gallery />
-      <Testimonials />
-      <Process />
-      <Stats />
-      <InstagramFeed />
-      <FAQ />
-      <Contact />
+      <main id="main">
+        <Hero />
+        <About />
+        <FeaturedCakes />
+        <Gallery />
+        <Testimonials />
+        <Process />
+        <Stats />
+        <InstagramFeed />
+        <FAQ />
+        <Contact />
+      </main>
       <Footer />
       <FloatingActions />
     </div>
