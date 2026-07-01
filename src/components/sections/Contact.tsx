@@ -17,7 +17,7 @@ const CONTACT_METHODS: ContactMethod[] = [
   { icon: MapPin, label: "Atelier", value: ADDRESS, href: MAPS_URL, external: true },
   { icon: Phone, label: "Call", value: PHONE_DISPLAY, href: `tel:${PHONE_TEL}` },
   { icon: Mail, label: "Email", value: EMAIL, href: EMAIL_URL },
-  { icon: Clock, label: "Hours", value: "Tue – Sun · 10:00 – 20:00", href: null },
+  { icon: Clock, label: "Hours", value: "Sun – Sat · 8:00am – 12:00am", href: null },
 ];
 
 /**
@@ -115,11 +115,11 @@ export function Contact() {
             <div className="rounded-2xl overflow-hidden border border-[rgba(212,175,55,0.18)] aspect-[16/9]">
               <iframe
                 title="Ayishaz Cakery — Kannur location map"
-                src="https://www.openstreetmap.org/export/embed.html?bbox=75.355%2C11.860%2C75.385%2C11.880&layer=mapnik&marker=11.870%2C75.370"
+                src="https://www.openstreetmap.org/export/embed.html?bbox=75.36854445934297%2C11.85828442399563%2C75.37562549114229%2C11.862988325403983"
                 className="w-full h-full grayscale contrast-125 opacity-80"
                 loading="lazy"
               />
-            </div>
+             </div>
             <SocialIconLinks className="pt-2" />
           </div>
 

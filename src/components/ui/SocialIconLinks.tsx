@@ -7,7 +7,6 @@ import { FACEBOOK_URL, INSTAGRAM_URL, WHATSAPP_URL } from "@/lib/site";
  */
 const SOCIALS = [
   { Icon: Instagram, href: INSTAGRAM_URL, label: "Instagram" },
-  { Icon: Facebook, href: FACEBOOK_URL, label: "Facebook" },
   { Icon: MessageCircle, href: WHATSAPP_URL, label: "WhatsApp" },
 ] as const;
 
