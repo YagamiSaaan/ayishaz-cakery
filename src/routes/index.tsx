@@ -31,6 +31,9 @@ import { FAQ } from "@/components/sections/FAQ";
 import { Contact } from "@/components/sections/Contact";
 import { Footer } from "@/components/sections/Footer";
 import { FloatingActions } from "@/components/sections/FloatingActions";
+import { Marquee } from "@/components/sections/Marquee";
+import { CustomCursor } from "@/components/ui/CustomCursor";
+import { ScrollProgress } from "@/components/ui/ScrollProgress";
 
 // Absolute URL for the hero image — required by `og:image` / `twitter:image`
 // (relative paths get rejected by most social-card scrapers).
@@ -164,9 +167,12 @@ export const Route = createFileRoute("/")({
 function Index() {
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-clip">
+      <ScrollProgress />
+      <CustomCursor />
       <Nav />
       <main id="main">
         <Hero />
+        <Marquee />
         <About />
         <InstagramFeed />
         <Gallery />

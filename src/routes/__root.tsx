@@ -15,20 +15,23 @@ import { Toaster } from "@/components/ui/sonner";
 
 function NotFoundComponent() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
+    <div className="flex min-h-screen items-center justify-center bg-[var(--espresso)] px-6 text-cream">
       <div className="max-w-md text-center">
-        <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
-        <p className="mt-2 text-sm text-muted-foreground">
-          The page you're looking for doesn't exist or has been moved.
+        <p className="eyebrow justify-center mb-6">Lost in the Kitchen</p>
+        <h1 className="text-7xl md:text-8xl font-serif text-gold-gradient italic">404</h1>
+        <h2 className="mt-4 text-2xl md:text-3xl font-serif">
+          This page has been whisked away
+        </h2>
+        <p className="mt-3 text-sm text-cream/70">
+          The confection you're looking for isn't on the counter. Let's get you back to something sweeter.
         </p>
-        <div className="mt-6">
-          <Link
-            to="/"
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-          >
-            Go home
+        <div className="mt-8 flex flex-wrap justify-center gap-3">
+          <Link to="/" className="btn-luxe btn-luxe-hover !py-3 !px-6 !text-[0.72rem]">
+            Return home
           </Link>
+          <a href="/#gallery" className="btn-ghost-luxe hover:bg-[rgba(212,175,55,0.08)]">
+            Browse the gallery
+          </a>
         </div>
       </div>
     </div>
