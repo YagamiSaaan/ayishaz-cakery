@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
+import { useState } from "react";
 import { Plus, Sparkles } from "lucide-react";
 import { fadeUp } from "./shared";
+import { Lightbox } from "./Lightbox";
 import cakeWedding from "@/assets/cake-wedding.jpg";
 import cakeLuxury from "@/assets/cake-luxury.jpg";
 import cakeMacarons from "@/assets/cake-macarons.jpg";
@@ -21,12 +23,14 @@ const GALLERY = [
   { src: cakeMacarons, h: "short" },
 ];
 
-export function Gallery({ onOpen }: { onOpen: (src: string) => void }) {
-  const heights: Record<string, string> = {
-    tall: "row-span-2",
-    med: "row-span-2",
-    short: "row-span-1",
-  };
+const HEIGHTS: Record<string, string> = {
+  tall: "row-span-2",
+  med: "row-span-2",
+  short: "row-span-1",
+};
+
+export function Gallery() {
+  const [lightbox, setLightbox] = useState<string | null>(null);
   return (
     <section id="gallery" className="relative py-24 md:py-32 px-6 md:px-10">
       <div className="max-w-[1400px] mx-auto">
