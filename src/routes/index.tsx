@@ -1,6 +1,8 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link, useRouter } from "@tanstack/react-router";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import { toast } from "sonner";
+import { contactSchema, type ContactErrors } from "@/lib/contact-schema";
 import {
   ArrowRight, ArrowUpRight, ChevronLeft, ChevronRight, Instagram, Facebook,
   Phone, Mail, MapPin, Clock, Plus, Minus, Sparkles, Award, Leaf, Cake,
