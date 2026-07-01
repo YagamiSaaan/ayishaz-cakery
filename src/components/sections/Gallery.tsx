@@ -44,12 +44,12 @@ export function Gallery() {
           {GALLERY.map((g, i) => (
             <motion.button
               key={i}
-              onClick={() => onOpen(g.src)}
+              onClick={() => setLightbox(g.src)}
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true, amount: 0.15 }}
               transition={{ duration: 0.7, delay: (i % 4) * 0.08 }}
-              className={`relative overflow-hidden rounded-3xl group ${heights[g.h]}`}
+              className={`relative overflow-hidden rounded-3xl group ${HEIGHTS[g.h]}`}
             >
               <img src={g.src} alt="" loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1500ms] group-hover:scale-110" />
               <div className="absolute inset-0 bg-[var(--espresso)]/0 group-hover:bg-[var(--espresso)]/40 transition-colors" />
