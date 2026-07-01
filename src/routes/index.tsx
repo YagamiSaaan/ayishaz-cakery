@@ -787,15 +787,29 @@ function Contact() {
               e.preventDefault();
               const form = e.currentTarget;
               const data = new FormData(form);
-              const name = String(data.get("name") || "");
-              const phone = String(data.get("phone") || "");
-              const email = String(data.get("email") || "");
-              const occasion = String(data.get("occasion") || "");
-              const message = String(data.get("message") || "");
-              const text = encodeURIComponent(
-                `Hi Ayishaz Cakery!%0A%0AName: ${name}%0APhone: ${phone}%0AEmail: ${email}%0AOccasion: ${occasion}%0A%0A${message}`
-              );
-              window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${text}`, "_blank", "noopener,noreferrer");
+              const name = String(data.get("name") || "").trim();
+              const phone = String(data.get("phone") || "").trim();
+              const email = String(data.get("email") || "").trim();
+              const occasion = String(data.get("occasion") || "").trim();
+              const message = String(data.get("message") || "").trim();
+
+              if (!name || !email) return;
+              const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+              if (!emailOk) return;
+
+              const subject = `Cake Enquiry — ${occasion || "New enquiry"} — ${name}`;
+              const bodyLines = [
+                `Name: ${name}`,
+                `Email: ${email}`,
+                `Phone: ${phone || "—"}`,
+                `Occasion: ${occasion || "—"}`,
+                "",
+                "Vision / Details:",
+                message || "—",
+              ];
+              const mailto = `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyLines.join("\n"))}`;
+              window.location.href = mailto;
+              form.reset();
             }}
             className="glass-cream rounded-3xl p-8 md:p-10 text-[var(--espresso)] space-y-5 shadow-[var(--shadow-luxe)]"
           >
