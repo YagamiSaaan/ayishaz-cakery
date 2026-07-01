@@ -1,14 +1,10 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Cake, Heart, Leaf, Sparkles, Truck } from "lucide-react";
+import { ArrowRight, Sparkles } from "lucide-react";
 import aboutCake from "@/assets/about-cake.jpg";
+import { ABOUT_FEATURES } from "@/lib/data/about-features";
+import { IconBadge } from "@/components/ui/IconBadge";
 
 export function About() {
-  const features = [
-    { icon: Leaf, title: "Premium Ingredients" },
-    { icon: Heart, title: "100% Eggless Options" },
-    { icon: Cake, title: "Custom Designs" },
-    { icon: Truck, title: "On-time Delivery" },
-  ];
   return (
     <section id="about" className="relative py-24 md:py-32 px-6 md:px-10">
       <div className="max-w-[1400px] mx-auto">
@@ -30,7 +26,7 @@ export function About() {
 
           <div>
             <div className="eyebrow mb-5 !text-[var(--caramel)]">
-              <Sparkles className="w-3.5 h-3.5" /> Welcome to Ayishaz Cakery
+              <Sparkles className="w-3.5 h-3.5" aria-hidden="true" /> Welcome to Ayishaz Cakery
             </div>
             <h2 className="text-4xl md:text-5xl lg:text-[3.5rem] leading-[1.05] text-[var(--espresso)]">
               Where Taste Meets<br />
@@ -43,16 +39,14 @@ export function About() {
               grand occasions, we make every moment a little sweeter.
             </p>
 
-            <div className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-5">
-              {features.map((f) => (
-                <div key={f.title} className="flex flex-col items-start gap-3">
-                  <div className="w-11 h-11 rounded-full bg-[var(--espresso)] flex items-center justify-center">
-                    <f.icon className="w-4 h-4 text-[var(--gold)]" />
-                  </div>
+            <ul className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-5 list-none">
+              {ABOUT_FEATURES.map((f) => (
+                <li key={f.title} className="flex flex-col items-start gap-3">
+                  <IconBadge icon={f.icon} size="sm" />
                   <p className="text-xs leading-tight text-[var(--mocha)] tracking-wide">{f.title}</p>
-                </div>
+                </li>
               ))}
-            </div>
+            </ul>
 
             <a href="#process" className="mt-9 inline-flex items-center gap-2 text-xs tracking-[0.2em] uppercase text-[var(--espresso)] border border-[var(--mocha)]/30 rounded-full px-6 py-3 hover:bg-[var(--espresso)] hover:text-[var(--cream)] transition-colors">
               Learn More About Us <ArrowRight className="w-3.5 h-3.5" />

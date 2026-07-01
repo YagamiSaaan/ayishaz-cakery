@@ -1,47 +1,33 @@
-import { motion } from "framer-motion";
 import { useState } from "react";
 import { toast } from "sonner";
-import {
-  ArrowRight, Clock, Facebook, Instagram, Mail, MapPin, MessageCircle, Phone, Sparkles,
-} from "lucide-react";
-import { fadeUp } from "./shared";
+import { ArrowRight, Clock, Mail, MapPin, Phone } from "lucide-react";
 import { contactSchema, type ContactErrors } from "@/lib/contact-schema";
 import {
-  ADDRESS, EMAIL, EMAIL_URL, FACEBOOK_URL, INSTAGRAM_URL, MAPS_URL, PHONE_DISPLAY, PHONE_TEL, WHATSAPP_URL,
+  ADDRESS, EMAIL, EMAIL_URL, MAPS_URL, PHONE_DISPLAY, PHONE_TEL, WHATSAPP_URL,
 } from "@/lib/site";
+import { SectionHeader } from "@/components/ui/SectionHeader";
+import { ContactMethodCard } from "@/components/ui/ContactMethodCard";
+import { SocialIconLinks } from "@/components/ui/SocialIconLinks";
+import { FormField } from "@/components/ui/FormField";
+import { FormTextarea } from "@/components/ui/FormTextarea";
+
+import type { LucideIcon } from "lucide-react";
+type ContactMethod = { icon: LucideIcon; label: string; value: string; href: string | null; external?: boolean };
+const CONTACT_METHODS: ContactMethod[] = [
+  { icon: MapPin, label: "Atelier", value: ADDRESS, href: MAPS_URL, external: true },
+  { icon: Phone, label: "Call", value: PHONE_DISPLAY, href: `tel:${PHONE_TEL}` },
+  { icon: Mail, label: "Email", value: EMAIL, href: EMAIL_URL },
+  { icon: Clock, label: "Hours", value: "Tue – Sun · 10:00 – 20:00", href: null },
+];
 
 /**
  * Contact section — atelier details on the left, enquiry form on the right.
- *
- * The form is client-only and dispatches enquiries via a `mailto:` link (no
- * backend). Validation is done with the shared Zod `contactSchema`; the user
- * is guided with inline field errors + toast notifications.
- *
- * Local state:
- *  - `errors`     — map of field-name → validation error message.
- *  - `submitting` — disables the submit button while the mailto is opening
- *                   so a double-tap doesn't spawn two mail-app windows.
+ * The form dispatches enquiries via `mailto:` after Zod validation.
  */
 export function Contact() {
   const [errors, setErrors] = useState<ContactErrors>({});
   const [submitting, setSubmitting] = useState(false);
 
-  /**
-   * Form submission handler.
-   *
-   * Pipeline:
-   *  1. Read raw values from the form's FormData.
-   *  2. `safeParse` against `contactSchema`. On failure, collect the first
-   *     error per field into `errors` state and abort.
-   *  3. Build a subject + body from validated data and navigate to a
-   *     `mailto:` URL. On success, reset the form and toast the user.
-   *  4. Any thrown error is caught and surfaced as a friendly toast; a
-   *     WhatsApp fallback is always visible below the form.
-   *
-   * @param e Native form submit event. `preventDefault` is called immediately
-   *          to keep the page from reloading.
-   * @returns void — the effect is side-effectful (navigation + toasts).
-   */
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (submitting) return;
@@ -83,9 +69,7 @@ export function Contact() {
         "Vision / Details:",
         v.message || "—",
       ];
-      const mailto = `mailto:${EMAIL}?subject=${encodeURIComponent(
-        subject
-      )}&body=${encodeURIComponent(bodyLines.join("\n"))}`;
+      const mailto = `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyLines.join("\n"))}`;
 
       try {
         window.location.href = mailto;
@@ -112,44 +96,22 @@ export function Contact() {
   return (
     <section id="contact" className="relative py-24 md:py-32 px-6 md:px-10">
       <div className="max-w-[1400px] mx-auto">
-        <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }} className="text-center mb-16">
-          <div className="eyebrow justify-center mb-5"><Sparkles className="w-3.5 h-3.5" /> Let's Create Together</div>
-          <h2 className="text-4xl md:text-6xl leading-[1.05]">Commission Your <span className="font-script italic text-gold-gradient">Masterpiece</span></h2>
-        </motion.div>
+        <SectionHeader eyebrow="Let's Create Together" align="center" className="mb-16">
+          Commission Your <span className="font-script italic text-gold-gradient">Masterpiece</span>
+        </SectionHeader>
 
         <div className="grid lg:grid-cols-[1fr_1.1fr] gap-10">
           <div className="space-y-5">
-            {[
-              { icon: MapPin, label: "Atelier", value: ADDRESS, href: MAPS_URL, external: true },
-              { icon: Phone, label: "Call", value: PHONE_DISPLAY, href: `tel:${PHONE_TEL}` },
-              { icon: Mail, label: "Email", value: EMAIL, href: EMAIL_URL },
-              { icon: Clock, label: "Hours", value: "Tue – Sun · 10:00 – 20:00", href: null as string | null },
-            ].map((c) => {
-              const inner = (
-                <>
-                  <div className="w-12 h-12 rounded-full bg-[var(--espresso)] flex items-center justify-center border border-[rgba(212,175,55,0.25)] shrink-0">
-                    <c.icon className="w-4 h-4 text-[var(--gold)]" />
-                  </div>
-                  <div>
-                    <p className="text-[0.65rem] tracking-[0.3em] uppercase text-[var(--caramel)] mb-1">{c.label}</p>
-                    <p className="text-cream">{c.value}</p>
-                  </div>
-                </>
-              );
-              const className = "glass-card rounded-2xl p-6 flex items-center gap-5 hover:border-[rgba(212,175,55,0.4)] transition";
-              return c.href ? (
-                <a
-                  key={c.label}
-                  href={c.href}
-                  {...(c.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                  className={className}
-                >
-                  {inner}
-                </a>
-              ) : (
-                <div key={c.label} className={className}>{inner}</div>
-              );
-            })}
+            {CONTACT_METHODS.map((c) => (
+              <ContactMethodCard
+                key={c.label}
+                icon={c.icon}
+                label={c.label}
+                value={c.value}
+                href={c.href}
+                external={c.external}
+              />
+            ))}
             <div className="rounded-2xl overflow-hidden border border-[rgba(212,175,55,0.18)] aspect-[16/9]">
               <iframe
                 title="Ayishaz Cakery — Kannur location map"
@@ -158,52 +120,28 @@ export function Contact() {
                 loading="lazy"
               />
             </div>
-            <div className="flex gap-3 pt-2">
-              {[
-                { Icon: Instagram, href: INSTAGRAM_URL, label: "Instagram" },
-                { Icon: Facebook, href: FACEBOOK_URL, label: "Facebook" },
-                { Icon: MessageCircle, href: WHATSAPP_URL, label: "WhatsApp" },
-              ].map(({ Icon, href, label }) => (
-                <a key={label} href={href} target="_blank" rel="noopener noreferrer" className="w-11 h-11 rounded-full border border-[rgba(212,175,55,0.3)] flex items-center justify-center text-cream/80 hover:bg-[var(--gold)] hover:text-[var(--espresso)] transition" aria-label={label}>
-                  <Icon className="w-4 h-4" />
-                </a>
-              ))}
-            </div>
+            <SocialIconLinks className="pt-2" />
           </div>
 
           <form
             noValidate
             onSubmit={handleSubmit}
+            aria-label="Cake enquiry"
             className="glass-cream rounded-3xl p-8 md:p-10 text-[var(--espresso)] space-y-5 shadow-[var(--shadow-luxe)]"
           >
             <div className="grid sm:grid-cols-2 gap-5">
-              <Field name="name" label="Your Name" placeholder="Layla Hassan" required maxLength={100} error={errors.name} />
-              <Field name="phone" label="Phone" placeholder="+91 98765 00000" maxLength={30} error={errors.phone} />
+              <FormField name="name" label="Your Name" placeholder="Layla Hassan" required maxLength={100} error={errors.name} />
+              <FormField name="phone" label="Phone" placeholder="+91 98765 00000" maxLength={30} error={errors.phone} />
             </div>
-            <Field name="email" label="Email" type="email" placeholder="you@email.com" required maxLength={255} error={errors.email} />
-            <Field name="occasion" label="Occasion" placeholder="Wedding · Birthday · Corporate" maxLength={120} error={errors.occasion} />
-            <div>
-              <label htmlFor="field-message" className="text-[0.65rem] tracking-[0.3em] uppercase text-[var(--mocha)] mb-2 block">Tell Us About Your Vision</label>
-              <textarea
-                id="field-message"
-                name="message"
-                rows={5}
-                maxLength={1000}
-                placeholder="Mood, palette, size, date…"
-                aria-invalid={errors.message ? true : undefined}
-                aria-describedby={errors.message ? "field-message-error" : undefined}
-                className={`w-full bg-transparent border-b py-3 focus:outline-none resize-none placeholder:text-[var(--mocha)]/40 ${errors.message ? "border-red-600 focus:border-red-700" : "border-[var(--mocha)]/30 focus:border-[var(--gold)]"}`}
-              />
-              {errors.message && (
-                <p id="field-message-error" className="text-xs text-red-700 mt-2">{errors.message}</p>
-              )}
-            </div>
+            <FormField name="email" label="Email" type="email" placeholder="you@email.com" required maxLength={255} error={errors.email} />
+            <FormField name="occasion" label="Occasion" placeholder="Wedding · Birthday · Corporate" maxLength={120} error={errors.occasion} />
+            <FormTextarea name="message" label="Tell Us About Your Vision" rows={5} maxLength={1000} placeholder="Mood, palette, size, date…" error={errors.message} />
             <button
               type="submit"
               disabled={submitting}
               className="btn-luxe btn-luxe-hover w-full justify-center mt-3 !bg-[var(--espresso)] !text-[var(--cream)] disabled:opacity-60 disabled:cursor-not-allowed"
             >
-              {submitting ? "Sending…" : "Send Enquiry"} <ArrowRight className="w-4 h-4" />
+              {submitting ? "Sending…" : "Send Enquiry"} <ArrowRight className="w-4 h-4" aria-hidden="true" />
             </button>
             <p className="text-[0.65rem] text-[var(--mocha)]/60 text-center pt-1">
               Prefer WhatsApp?{" "}
@@ -216,62 +154,5 @@ export function Contact() {
         </div>
       </div>
     </section>
-  );
-}
-
-/**
- * Reusable labeled text input with inline validation UI.
- *
- * @param label      Human-readable label rendered above the input (also used
- *                   to derive the DOM `id` when `name` is not supplied).
- * @param type       HTML input `type` attribute. Defaults to `"text"`.
- * @param placeholder Placeholder text shown in the empty input.
- * @param name       Form field name — read by FormData in the submit handler.
- * @param required   Adds native `required` validation on the input.
- * @param maxLength  Hard cap on characters at the input level (mirrors the
- *                   Zod schema's `.max()` so users can't exceed the limit).
- * @param error      Optional validation message. When present the input is
- *                   styled red, `aria-invalid` is set, and the message is
- *                   linked via `aria-describedby` for screen readers.
- * @returns A labeled input wrapped in a container `<div>`.
- */
-function Field({
-  label,
-  type = "text",
-  placeholder,
-  name,
-  required,
-  maxLength,
-  error,
-}: {
-  label: string;
-  type?: string;
-  placeholder?: string;
-  name?: string;
-  required?: boolean;
-  maxLength?: number;
-  error?: string;
-}) {
-  // Derive a stable DOM id so <label htmlFor> and aria-describedby line up.
-  const id = `field-${name ?? label.replace(/\s+/g, "-").toLowerCase()}`;
-  const errorId = error ? `${id}-error` : undefined;
-  return (
-    <div>
-      <label htmlFor={id} className="text-[0.65rem] tracking-[0.3em] uppercase text-[var(--mocha)] mb-2 block">{label}</label>
-      <input
-        id={id}
-        name={name}
-        required={required}
-        type={type}
-        placeholder={placeholder}
-        maxLength={maxLength}
-        aria-invalid={error ? true : undefined}
-        aria-describedby={errorId}
-        className={`w-full bg-transparent border-b py-3 focus:outline-none placeholder:text-[var(--mocha)]/40 ${error ? "border-red-600 focus:border-red-700" : "border-[var(--mocha)]/30 focus:border-[var(--gold)]"}`}
-      />
-      {error && (
-        <p id={errorId} className="text-xs text-red-700 mt-2">{error}</p>
-      )}
-    </div>
   );
 }
