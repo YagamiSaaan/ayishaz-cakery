@@ -11,12 +11,14 @@ import { SocialIconLinks } from "@/components/ui/SocialIconLinks";
 import { FormField } from "@/components/ui/FormField";
 import { FormTextarea } from "@/components/ui/FormTextarea";
 
-const CONTACT_METHODS = [
+import type { LucideIcon } from "lucide-react";
+type ContactMethod = { icon: LucideIcon; label: string; value: string; href: string | null; external?: boolean };
+const CONTACT_METHODS: ContactMethod[] = [
   { icon: MapPin, label: "Atelier", value: ADDRESS, href: MAPS_URL, external: true },
   { icon: Phone, label: "Call", value: PHONE_DISPLAY, href: `tel:${PHONE_TEL}` },
   { icon: Mail, label: "Email", value: EMAIL, href: EMAIL_URL },
   { icon: Clock, label: "Hours", value: "Tue – Sun · 10:00 – 20:00", href: null },
-] as const;
+];
 
 /**
  * Contact section — atelier details on the left, enquiry form on the right.
