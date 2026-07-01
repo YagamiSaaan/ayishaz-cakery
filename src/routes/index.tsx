@@ -20,6 +20,9 @@ import gallery2 from "@/assets/gallery-2.jpg";
 import gallery3 from "@/assets/gallery-3.jpg";
 import gallery4 from "@/assets/gallery-4.jpg";
 
+const SITE_URL = "https://ayishaz-cakery.lovable.app";
+const ogImageAbs = `${SITE_URL}${heroCake}`;
+
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
@@ -29,15 +32,15 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: "Ayishaz Cakery — Luxury Cake Atelier in Kannur" },
       { property: "og:description", content: "Edible art crafted for unforgettable celebrations. Bespoke wedding & birthday cakes in Kannur, Kerala." },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://creme-artisan-bakes.lovable.app/" },
-      { property: "og:image", content: heroCake },
+      { property: "og:url", content: `${SITE_URL}/` },
+      { property: "og:image", content: ogImageAbs },
       { property: "og:locale", content: "en_IN" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Ayishaz Cakery — Luxury Cake Atelier in Kannur" },
       { name: "twitter:description", content: "Edible art crafted for unforgettable celebrations." },
-      { name: "twitter:image", content: heroCake },
+      { name: "twitter:image", content: ogImageAbs },
     ],
-    links: [{ rel: "canonical", href: "https://creme-artisan-bakes.lovable.app/" }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/` }],
     scripts: [
       {
         type: "application/ld+json",
@@ -45,9 +48,9 @@ export const Route = createFileRoute("/")({
           "@context": "https://schema.org",
           "@type": "Bakery",
           name: "Ayishaz Cakery",
-          image: "https://creme-artisan-bakes.lovable.app/og.jpg",
-          "@id": "https://creme-artisan-bakes.lovable.app/",
-          url: "https://creme-artisan-bakes.lovable.app/",
+          image: ogImageAbs,
+          "@id": `${SITE_URL}/`,
+          url: `${SITE_URL}/`,
           telephone: "+91-98765-43210",
           priceRange: "₹₹₹",
           address: {
