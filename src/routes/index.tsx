@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import {
   ArrowRight, ArrowUpRight, ChevronLeft, ChevronRight, Instagram, Facebook,
   Phone, Mail, MapPin, Clock, Plus, Minus, Sparkles, Award, Leaf, Cake,
-  Truck, Heart, MessageCircle, Star, Quote, X,
+  Truck, Heart, MessageCircle, Star, Quote, X, Menu,
 } from "lucide-react";
 
 import heroCake from "@/assets/hero-cake.jpg";
