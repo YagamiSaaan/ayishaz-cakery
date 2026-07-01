@@ -219,6 +219,22 @@ export function Contact() {
   );
 }
 
+/**
+ * Reusable labeled text input with inline validation UI.
+ *
+ * @param label      Human-readable label rendered above the input (also used
+ *                   to derive the DOM `id` when `name` is not supplied).
+ * @param type       HTML input `type` attribute. Defaults to `"text"`.
+ * @param placeholder Placeholder text shown in the empty input.
+ * @param name       Form field name — read by FormData in the submit handler.
+ * @param required   Adds native `required` validation on the input.
+ * @param maxLength  Hard cap on characters at the input level (mirrors the
+ *                   Zod schema's `.max()` so users can't exceed the limit).
+ * @param error      Optional validation message. When present the input is
+ *                   styled red, `aria-invalid` is set, and the message is
+ *                   linked via `aria-describedby` for screen readers.
+ * @returns A labeled input wrapped in a container `<div>`.
+ */
 function Field({
   label,
   type = "text",
@@ -236,6 +252,7 @@ function Field({
   maxLength?: number;
   error?: string;
 }) {
+  // Derive a stable DOM id so <label htmlFor> and aria-describedby line up.
   const id = `field-${name ?? label.replace(/\s+/g, "-").toLowerCase()}`;
   const errorId = error ? `${id}-error` : undefined;
   return (
