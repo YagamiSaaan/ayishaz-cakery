@@ -168,12 +168,11 @@ function Index() {
       <main id="main">
         <Hero />
         <About />
-        <FeaturedCakes />
+        <InstagramFeed />
         <Gallery />
         <Testimonials />
         <Process />
         <Stats />
-        <InstagramFeed />
         <FAQ />
         <Contact />
       </main>
