@@ -7,7 +7,8 @@ import gallery2 from "@/assets/gallery-2.jpg";
 import gallery3 from "@/assets/gallery-3.jpg";
 import gallery4 from "@/assets/gallery-4.jpg";
 
-export type GalleryItem = { src: string; h: "tall" | "med" | "short"; alt: string };
+export type GalleryHeight = "tall" | "med" | "short";
+export type GalleryItem = { src: string; h: GalleryHeight; alt: string };
 
 export const GALLERY: GalleryItem[] = [
   { src: gallery1, h: "tall", alt: "Rustic naked wedding cake with fresh florals" },
@@ -20,10 +21,9 @@ export const GALLERY: GalleryItem[] = [
   { src: cakeMacarons, h: "short", alt: "Tower of pastel French macarons" },
 ];
 
-export const INSTAGRAM_IMAGES = [gallery1, cakeBirthday(), gallery3, cakeMacarons, gallery4, cakeLuxury];
-
-// Small helper so the eager import cost is paid once regardless of caller.
-function cakeBirthday() {
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
-  return new URL("@/assets/cake-birthday.jpg", import.meta.url).href;
-}
+/** Tailwind row-span mapping — stable module-level identity. */
+export const GALLERY_HEIGHTS: Record<GalleryHeight, string> = {
+  tall: "row-span-2",
+  med: "row-span-2",
+  short: "row-span-1",
+};
