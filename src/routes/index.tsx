@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import {
   ArrowRight, ArrowUpRight, ChevronLeft, ChevronRight, Instagram, Facebook,
   Phone, Mail, MapPin, Clock, Plus, Minus, Sparkles, Award, Leaf, Cake,
-  Truck, Heart, MessageCircle, Star, Quote, X,
+  Truck, Heart, MessageCircle, Star, Quote, X, Menu,
 } from "lucide-react";
 
 import heroCake from "@/assets/hero-cake.jpg";
@@ -20,6 +20,9 @@ import gallery2 from "@/assets/gallery-2.jpg";
 import gallery3 from "@/assets/gallery-3.jpg";
 import gallery4 from "@/assets/gallery-4.jpg";
 
+const SITE_URL = "https://ayishaz-cakery.lovable.app";
+const ogImageAbs = `${SITE_URL}${heroCake}`;
+
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
@@ -29,15 +32,15 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: "Ayishaz Cakery — Luxury Cake Atelier in Kannur" },
       { property: "og:description", content: "Edible art crafted for unforgettable celebrations. Bespoke wedding & birthday cakes in Kannur, Kerala." },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://creme-artisan-bakes.lovable.app/" },
-      { property: "og:image", content: heroCake },
+      { property: "og:url", content: `${SITE_URL}/` },
+      { property: "og:image", content: ogImageAbs },
       { property: "og:locale", content: "en_IN" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Ayishaz Cakery — Luxury Cake Atelier in Kannur" },
       { name: "twitter:description", content: "Edible art crafted for unforgettable celebrations." },
-      { name: "twitter:image", content: heroCake },
+      { name: "twitter:image", content: ogImageAbs },
     ],
-    links: [{ rel: "canonical", href: "https://creme-artisan-bakes.lovable.app/" }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/` }],
     scripts: [
       {
         type: "application/ld+json",
@@ -45,9 +48,9 @@ export const Route = createFileRoute("/")({
           "@context": "https://schema.org",
           "@type": "Bakery",
           name: "Ayishaz Cakery",
-          image: "https://creme-artisan-bakes.lovable.app/og.jpg",
-          "@id": "https://creme-artisan-bakes.lovable.app/",
-          url: "https://creme-artisan-bakes.lovable.app/",
+          image: ogImageAbs,
+          "@id": `${SITE_URL}/`,
+          url: `${SITE_URL}/`,
           telephone: "+91-98765-43210",
           priceRange: "₹₹₹",
           address: {
@@ -132,14 +135,19 @@ function Index() {
 
 /* ---------------- NAV ---------------- */
 function Nav({ scrolled }: { scrolled: boolean }) {
+  const [open, setOpen] = useState(false);
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [open]);
   return (
     <header
       className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
-        scrolled ? "py-3 backdrop-blur-xl bg-[rgba(27,18,13,0.7)] border-b border-[rgba(212,175,55,0.12)]" : "py-6 bg-transparent"
+        scrolled || open ? "py-3 backdrop-blur-xl bg-[rgba(27,18,13,0.85)] border-b border-[rgba(212,175,55,0.12)]" : "py-6 bg-transparent"
       }`}
     >
       <div className="max-w-[1400px] mx-auto px-6 md:px-10 flex items-center justify-between">
-        <a href="#home" className="flex flex-col leading-none">
+        <a href="#home" onClick={() => setOpen(false)} className="flex flex-col leading-none">
           <span className="font-script text-3xl text-gold-gradient">Ayishaz</span>
           <span className="text-[0.6rem] tracking-[0.4em] text-[var(--caramel)] mt-1 pl-1">CAKERY</span>
         </a>
@@ -155,15 +163,52 @@ function Nav({ scrolled }: { scrolled: boolean }) {
             </a>
           ))}
         </nav>
-        <a
-          href={WHATSAPP_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="btn-luxe btn-luxe-hover hidden md:inline-flex !py-3 !px-6 !text-[0.72rem]"
-        >
-          Order Now <ArrowRight className="w-3.5 h-3.5" />
-        </a>
+        <div className="flex items-center gap-3">
+          <a
+            href={WHATSAPP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-luxe btn-luxe-hover hidden md:inline-flex !py-3 !px-6 !text-[0.72rem]"
+          >
+            Order Now <ArrowRight className="w-3.5 h-3.5" />
+          </a>
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+            className="lg:hidden w-11 h-11 rounded-full border border-[rgba(212,175,55,0.3)] flex items-center justify-center text-cream/90 hover:bg-[var(--gold)] hover:text-[var(--espresso)] transition"
+          >
+            {open ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
+          </button>
+        </div>
       </div>
+
+      {open && (
+        <div className="lg:hidden mt-3 border-t border-[rgba(212,175,55,0.12)]">
+          <nav className="max-w-[1400px] mx-auto px-6 md:px-10 py-6 flex flex-col gap-4">
+            {NAV.map((n) => (
+              <a
+                key={n.label}
+                href={n.href}
+                onClick={() => setOpen(false)}
+                className="text-sm tracking-[0.18em] uppercase text-cream/85 hover:text-[var(--gold)] transition py-1"
+              >
+                {n.label}
+              </a>
+            ))}
+            <a
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setOpen(false)}
+              className="btn-luxe btn-luxe-hover justify-center mt-2 !py-3 !text-[0.72rem]"
+            >
+              Order Now <ArrowRight className="w-3.5 h-3.5" />
+            </a>
+          </nav>
+        </div>
+      )}
     </header>
   );
 }
@@ -499,10 +544,10 @@ function Lightbox({ src, onClose }: { src: string; onClose: () => void }) {
   }, [onClose]);
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="fixed inset-0 z-[100] bg-[var(--espresso)]/95 backdrop-blur-xl flex items-center justify-center p-4" onClick={onClose}>
-      <button className="absolute top-6 right-6 w-12 h-12 rounded-full border border-[rgba(212,175,55,0.3)] flex items-center justify-center text-cream hover:bg-[var(--gold)] hover:text-[var(--espresso)] transition" aria-label="Close">
+      <button onClick={onClose} className="absolute top-6 right-6 w-12 h-12 rounded-full border border-[rgba(212,175,55,0.3)] flex items-center justify-center text-cream hover:bg-[var(--gold)] hover:text-[var(--espresso)] transition" aria-label="Close">
         <X className="w-5 h-5" />
       </button>
-      <motion.img initial={{ scale: 0.95 }} animate={{ scale: 1 }} src={src} alt="" className="max-w-[90vw] max-h-[88vh] object-contain rounded-2xl shadow-[var(--shadow-luxe)]" />
+      <motion.img onClick={(e) => e.stopPropagation()} initial={{ scale: 0.95 }} animate={{ scale: 1 }} src={src} alt="" className="max-w-[90vw] max-h-[88vh] object-contain rounded-2xl shadow-[var(--shadow-luxe)]" />
     </motion.div>
   );
 }
@@ -834,10 +879,11 @@ function Contact() {
 }
 
 function Field({ label, type = "text", placeholder, name, required }: { label: string; type?: string; placeholder?: string; name?: string; required?: boolean }) {
+  const id = `field-${name ?? label.replace(/\s+/g, "-").toLowerCase()}`;
   return (
     <div>
-      <label className="text-[0.65rem] tracking-[0.3em] uppercase text-[var(--mocha)] mb-2 block">{label}</label>
-      <input name={name} required={required} type={type} placeholder={placeholder} className="w-full bg-transparent border-b border-[var(--mocha)]/30 py-3 focus:outline-none focus:border-[var(--gold)] placeholder:text-[var(--mocha)]/40" />
+      <label htmlFor={id} className="text-[0.65rem] tracking-[0.3em] uppercase text-[var(--mocha)] mb-2 block">{label}</label>
+      <input id={id} name={name} required={required} type={type} placeholder={placeholder} className="w-full bg-transparent border-b border-[var(--mocha)]/30 py-3 focus:outline-none focus:border-[var(--gold)] placeholder:text-[var(--mocha)]/40" />
     </div>
   );
 }
