@@ -116,7 +116,7 @@ function HeroImage() {
         aria-hidden="true"
       >
         <div className="text-[var(--espresso)]">
-          <StarRating count={3} size={2.5} label="" />
+          <StarRating count={3} size={10} label="" />
           <p className="text-[0.55rem] md:text-[0.65rem] tracking-[0.25em] font-medium leading-tight mt-1">
             AWARD<br />WINNING<br />
             <span className="text-[var(--gold)]">CAKE ARTIST</span>
