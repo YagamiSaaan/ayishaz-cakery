@@ -11,7 +11,7 @@ export function FAQ() {
       <div className="max-w-[1100px] mx-auto">
         <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }} className="text-center mb-14">
           <div className="eyebrow justify-center mb-5"><Sparkles className="w-3.5 h-3.5" /> Frequently Asked</div>
-          <h2 className="text-4xl md:text-6xl leading-[1.05]">Questions, <span className="font-script italic text-gold-gradient">Answered</span></h2>
+          <h2 id="faq-heading" className="text-4xl md:text-6xl leading-[1.05]">Questions, <span className="font-script italic text-gold-gradient">Answered</span></h2>
         </motion.div>
         <div className="divide-y divide-[rgba(212,175,55,0.15)] border-y border-[rgba(212,175,55,0.15)]">
           {FAQS.map((f, i) => (
