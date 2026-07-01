@@ -21,7 +21,7 @@ import { FAQS } from "@/lib/faqs";
 import { Nav } from "@/components/sections/Nav";
 import { Hero } from "@/components/sections/Hero";
 import { About } from "@/components/sections/About";
-import { FeaturedCakes } from "@/components/sections/FeaturedCakes";
+
 import { Gallery } from "@/components/sections/Gallery";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { Process } from "@/components/sections/Process";
@@ -168,12 +168,11 @@ function Index() {
       <main id="main">
         <Hero />
         <About />
-        <FeaturedCakes />
+        <InstagramFeed />
         <Gallery />
         <Testimonials />
         <Process />
         <Stats />
-        <InstagramFeed />
         <FAQ />
         <Contact />
       </main>
