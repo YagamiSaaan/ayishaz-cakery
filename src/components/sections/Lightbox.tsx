@@ -2,6 +2,22 @@ import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { X } from "lucide-react";
 
+/**
+ * Fullscreen image preview modal used by the Gallery.
+ *
+ * @param src     Absolute or bundler-resolved URL of the image to display.
+ * @param onClose Callback invoked when the user dismisses the modal —
+ *                triggered by (a) clicking the backdrop, (b) clicking the
+ *                close button, or (c) pressing the `Escape` key.
+ *
+ * Side effects while mounted:
+ *  - Adds a global `keydown` listener for `Escape` (removed on unmount).
+ *  - Locks `document.body.overflow` to `"hidden"` so the page behind the
+ *    modal doesn't scroll. Restored on unmount.
+ *
+ * If the image fails to load (`onError`) a friendly fallback card is shown
+ * instead of a broken image icon.
+ */
 export function Lightbox({ src, onClose }: { src: string; onClose: () => void }) {
   const [failed, setFailed] = useState(false);
   useEffect(() => {
