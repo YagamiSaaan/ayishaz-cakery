@@ -107,18 +107,47 @@ export const Route = createFileRoute("/")({
           image: ogImageAbs,
           "@id": `${SITE_URL}/`,
           url: `${SITE_URL}/`,
-          telephone: "+91-98765-43210",
+          telephone: PHONE_TEL,
           priceRange: "₹₹₹",
+          servesCuisine: ["Cakes", "Desserts", "Patisserie"],
           address: {
             "@type": "PostalAddress",
             streetAddress: "Fort Road",
             addressLocality: "Kannur",
             addressRegion: "Kerala",
+            postalCode: "670001",
             addressCountry: "IN",
           },
           geo: { "@type": "GeoCoordinates", latitude: 11.870, longitude: 75.370 },
           openingHours: "Tu-Su 10:00-20:00",
           sameAs: [INSTAGRAM_URL, FACEBOOK_URL],
+          aggregateRating: {
+            "@type": "AggregateRating",
+            ratingValue: "4.9",
+            reviewCount: "2000",
+          },
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: FAQS.map((f) => ({
+            "@type": "Question",
+            name: f.q,
+            acceptedAnswer: { "@type": "Answer", text: f.a },
+          })),
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: `${SITE_URL}/` },
+          ],
         }),
       },
     ],
