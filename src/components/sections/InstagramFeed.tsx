@@ -6,7 +6,7 @@ import { INSTAGRAM_IMAGES } from "@/lib/data/instagram";
 
 export function InstagramFeed() {
   return (
-    <section className="relative py-24 md:py-32 px-6 md:px-10" aria-label="Instagram highlights">
+    <section id="instagram" className="relative py-24 md:py-32 px-6 md:px-10" aria-label="Instagram highlights">
       <div className="max-w-[1400px] mx-auto">
         <motion.div
           variants={fadeUp}
