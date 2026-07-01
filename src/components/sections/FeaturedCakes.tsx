@@ -16,10 +16,12 @@ export function FeaturedCakes() {
   return (
     <section id="cakes" className="relative py-24 md:py-32">
       <div className="max-w-[1400px] mx-auto px-6 md:px-10 flex flex-wrap items-end justify-between gap-6 mb-14">
-        <SectionHeader eyebrow="Our Signature Collection">
-          Featured <span className="font-script italic text-gold-gradient">Cakes</span>
-          <span className="block gold-hairline mt-5 w-32" />
-        </SectionHeader>
+        <div>
+          <SectionHeader eyebrow="Our Signature Collection">
+            Featured <span className="font-script italic text-gold-gradient">Cakes</span>
+          </SectionHeader>
+          <div className="gold-hairline mt-5 w-32" />
+        </div>
         <div className="flex items-center gap-4">
           <a href="#gallery" className="btn-ghost-luxe hover:bg-[rgba(212,175,55,0.08)]">
             View All Cakes <ArrowRight className="w-3.5 h-3.5" />
