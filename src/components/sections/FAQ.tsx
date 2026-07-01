@@ -7,7 +7,7 @@ import { FAQS } from "@/lib/faqs";
 export function FAQ() {
   const [open, setOpen] = useState<number>(0);
   return (
-    <section className="relative py-24 md:py-32 px-6 md:px-10">
+    <section id="faq" aria-labelledby="faq-heading" className="relative py-24 md:py-32 px-6 md:px-10">
       <div className="max-w-[1100px] mx-auto">
         <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }} className="text-center mb-14">
           <div className="eyebrow justify-center mb-5"><Sparkles className="w-3.5 h-3.5" /> Frequently Asked</div>
