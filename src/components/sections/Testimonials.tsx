@@ -16,14 +16,14 @@ function initials(name: string) {
 
 export function Testimonials() {
   return (
-    <section id="testimonials" className="relative py-24 md:py-32 px-6 md:px-10">
+    <section id="testimonials" className="relative py-24 md:py-32 px-4 sm:px-6 md:px-10">
       <div className="max-w-[1400px] mx-auto">
         <SectionHeader eyebrow="Kind Words" align="center" className="mb-16">
           Loved by Those Who<br />
           <span className="font-script italic text-gold-gradient">Celebrate Beautifully</span>
         </SectionHeader>
 
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {TESTIMONIALS.map((t, i) => (
             <motion.article
               key={t.name}
