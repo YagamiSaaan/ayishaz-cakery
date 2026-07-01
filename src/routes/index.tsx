@@ -15,7 +15,7 @@ import { useEffect } from "react";
 import { Sparkles } from "lucide-react";
 
 import heroCake from "@/assets/hero-cake.jpg";
-import { SITE_URL, INSTAGRAM_URL, FACEBOOK_URL, PHONE_TEL, ADDRESS } from "@/lib/site";
+import { SITE_URL, INSTAGRAM_URL, FACEBOOK_URL, PHONE_TEL } from "@/lib/site";
 import { FAQS } from "@/lib/faqs";
 
 import { Nav } from "@/components/sections/Nav";
