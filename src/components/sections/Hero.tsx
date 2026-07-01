@@ -98,6 +98,8 @@ export function Hero() {
               alt="Luxury chocolate drip cake with gold leaf"
               width={1280}
               height={1280}
+              fetchPriority="high"
+              decoding="async"
               className="relative w-full h-full object-cover rounded-full shadow-[var(--shadow-luxe)]"
             />
             <motion.div

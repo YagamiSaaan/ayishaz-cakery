@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
+import { useState } from "react";
 import { Plus, Sparkles } from "lucide-react";
 import { fadeUp } from "./shared";
+import { Lightbox } from "./Lightbox";
 import cakeWedding from "@/assets/cake-wedding.jpg";
 import cakeLuxury from "@/assets/cake-luxury.jpg";
 import cakeMacarons from "@/assets/cake-macarons.jpg";
@@ -21,12 +23,14 @@ const GALLERY = [
   { src: cakeMacarons, h: "short" },
 ];
 
-export function Gallery({ onOpen }: { onOpen: (src: string) => void }) {
-  const heights: Record<string, string> = {
-    tall: "row-span-2",
-    med: "row-span-2",
-    short: "row-span-1",
-  };
+const HEIGHTS: Record<string, string> = {
+  tall: "row-span-2",
+  med: "row-span-2",
+  short: "row-span-1",
+};
+
+export function Gallery() {
+  const [lightbox, setLightbox] = useState<string | null>(null);
   return (
     <section id="gallery" className="relative py-24 md:py-32 px-6 md:px-10">
       <div className="max-w-[1400px] mx-auto">
@@ -40,12 +44,12 @@ export function Gallery({ onOpen }: { onOpen: (src: string) => void }) {
           {GALLERY.map((g, i) => (
             <motion.button
               key={i}
-              onClick={() => onOpen(g.src)}
+              onClick={() => setLightbox(g.src)}
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true, amount: 0.15 }}
               transition={{ duration: 0.7, delay: (i % 4) * 0.08 }}
-              className={`relative overflow-hidden rounded-3xl group ${heights[g.h]}`}
+              className={`relative overflow-hidden rounded-3xl group ${HEIGHTS[g.h]}`}
             >
               <img src={g.src} alt="" loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1500ms] group-hover:scale-110" />
               <div className="absolute inset-0 bg-[var(--espresso)]/0 group-hover:bg-[var(--espresso)]/40 transition-colors" />
@@ -58,6 +62,7 @@ export function Gallery({ onOpen }: { onOpen: (src: string) => void }) {
           ))}
         </div>
       </div>
+      {lightbox && <Lightbox src={lightbox} onClose={() => setLightbox(null)} />}
     </section>
   );
 }
