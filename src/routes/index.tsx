@@ -20,7 +20,20 @@ import gallery2 from "@/assets/gallery-2.jpg";
 import gallery3 from "@/assets/gallery-3.jpg";
 import gallery4 from "@/assets/gallery-4.jpg";
 
-const SITE_URL = "https://ayishaz-cakery.lovable.app";
+import {
+  SITE_URL,
+  NAV,
+  PHONE_DISPLAY,
+  PHONE_TEL,
+  WHATSAPP_URL,
+  EMAIL,
+  EMAIL_URL,
+  INSTAGRAM_URL,
+  FACEBOOK_URL,
+  ADDRESS,
+  MAPS_URL,
+} from "@/lib/site";
+
 const ogImageAbs = `${SITE_URL}${heroCake}`;
 
 export const Route = createFileRoute("/")({
@@ -62,10 +75,7 @@ export const Route = createFileRoute("/")({
           },
           geo: { "@type": "GeoCoordinates", latitude: 11.870, longitude: 75.370 },
           openingHours: "Tu-Su 10:00-20:00",
-          sameAs: [
-            "https://instagram.com/ayishaz.cakery",
-            "https://facebook.com/ayishazcakery",
-          ],
+          sameAs: [INSTAGRAM_URL, FACEBOOK_URL],
         }),
       },
     ],
@@ -73,29 +83,6 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const NAV = [
-  { label: "Home", href: "#home" },
-  { label: "About", href: "#about" },
-  { label: "Cakes", href: "#cakes" },
-  { label: "Gallery", href: "#gallery" },
-  { label: "Process", href: "#process" },
-  { label: "Testimonials", href: "#testimonials" },
-  { label: "Contact", href: "#contact" },
-];
-
-const PHONE_DISPLAY = "+91 98765 43210";
-const PHONE_TEL = "+919876543210";
-const WHATSAPP_NUMBER = "919876543210";
-const WHATSAPP_MESSAGE = encodeURIComponent(
-  "Hi Ayishaz Cakery! I'd like to place an order. Could you share availability and pricing?"
-);
-const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MESSAGE}`;
-const EMAIL = "hello@ayishazcakery.com";
-const EMAIL_URL = `mailto:${EMAIL}?subject=${encodeURIComponent("Cake Enquiry")}`;
-const INSTAGRAM_URL = "https://instagram.com/ayishaz.cakery";
-const FACEBOOK_URL = "https://facebook.com/ayishazcakery";
-const ADDRESS = "Fort Road, Kannur — Kerala, India";
-const MAPS_URL = "https://www.google.com/maps/search/?api=1&query=Fort+Road+Kannur+Kerala";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
