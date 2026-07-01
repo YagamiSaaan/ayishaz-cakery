@@ -8,8 +8,22 @@ import cakeWedding from "@/assets/cake-wedding.jpg";
 import cakeMacarons from "@/assets/cake-macarons.jpg";
 import gallery1 from "@/assets/gallery-1.jpg";
 
+/**
+ * Landing hero — editorial split layout with headline + LCP cake image.
+ *
+ * Uses Framer Motion's `useScroll` to derive two parallax transforms tied to
+ * the section's scroll progress (0 → 1 as the section leaves the viewport):
+ *  - `yImg`  translates the cake image downward (0 → 120px) for depth.
+ *  - `yText` translates the copy upward (0 → -60px), producing a gentle
+ *    counter-parallax so the two panels drift apart on scroll.
+ *
+ * The hero image is marked `fetchPriority="high"` and is also preloaded via
+ * the route `head().links` — it is the LCP element on the home page.
+ */
 export function Hero() {
   const ref = useRef<HTMLDivElement>(null);
+  // Track scroll progress *within this section*: start when the section top
+  // hits the viewport top, end when the section bottom hits the viewport top.
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   const yImg = useTransform(scrollYProgress, [0, 1], [0, 120]);
   const yText = useTransform(scrollYProgress, [0, 1], [0, -60]);
