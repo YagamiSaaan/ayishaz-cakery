@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { STATS } from "@/lib/data/stats";
 import { IconBadge } from "@/components/ui/IconBadge";
+import { CountUp } from "@/components/ui/CountUp";
 
 export function Stats() {
   return (
@@ -18,7 +19,7 @@ export function Stats() {
               <IconBadge icon={s.icon} size="sm" className="mx-auto mb-4" />
               <dt className="sr-only">{s.l}</dt>
               <dd>
-                <p className="text-3xl md:text-5xl font-serif">{s.n}</p>
+                <CountUp value={s.n} className="text-3xl md:text-5xl font-serif block" />
                 <p className="text-[0.7rem] tracking-[0.25em] uppercase text-cream/55 mt-2">{s.l}</p>
               </dd>
             </div>
