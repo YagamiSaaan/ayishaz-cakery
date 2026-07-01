@@ -2,6 +2,20 @@ import { useEffect, useState } from "react";
 import { ArrowRight, Menu, X } from "lucide-react";
 import { NAV, WHATSAPP_URL } from "@/lib/site";
 
+/**
+ * Sticky top navigation.
+ *
+ * Owns two pieces of local UI state (kept in the leaf to avoid re-rendering
+ * the whole landing page on scroll):
+ *  - `scrolled` — `true` once the user has scrolled past 40px. Toggles the
+ *    translucent blurred background + tighter padding. Updated inside a
+ *    `requestAnimationFrame` callback and only committed when the boolean
+ *    actually changes, so `setState` fires at most twice per full page scroll.
+ *  - `open`     — mobile menu open/closed. While open, `body.overflow` is
+ *    locked to prevent the page underneath from scrolling.
+ *
+ * No props. Renders a `<header>` landmark.
+ */
 export function Nav() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
