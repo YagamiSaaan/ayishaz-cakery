@@ -1,9 +1,18 @@
 /**
  * Ayishaz Cakery — shared site constants.
- * Single source of truth for brand, contact and navigation strings.
+ *
+ * Single source of truth for brand strings, contact details, navigation items
+ * and outbound links (WhatsApp, email, socials, maps). Consumed by every
+ * section component and by the route `head()` metadata so we never hardcode
+ * URLs / phone numbers in more than one place.
+ *
+ * Update this file to change brand copy, contact info, or nav labels sitewide.
  */
 
+/** Canonical production origin (no trailing slash). Used for canonical + OG URLs. */
 export const SITE_URL = "https://ayishaz-cakery.lovable.app";
+
+/** Brand identity block. `since` powers the "Handmade in Kannur since …" strapline. */
 
 export const BRAND = {
   name: "Ayishaz Cakery",
