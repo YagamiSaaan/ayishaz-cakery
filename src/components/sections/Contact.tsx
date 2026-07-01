@@ -10,10 +10,38 @@ import {
   ADDRESS, EMAIL, EMAIL_URL, FACEBOOK_URL, INSTAGRAM_URL, MAPS_URL, PHONE_DISPLAY, PHONE_TEL, WHATSAPP_URL,
 } from "@/lib/site";
 
+/**
+ * Contact section — atelier details on the left, enquiry form on the right.
+ *
+ * The form is client-only and dispatches enquiries via a `mailto:` link (no
+ * backend). Validation is done with the shared Zod `contactSchema`; the user
+ * is guided with inline field errors + toast notifications.
+ *
+ * Local state:
+ *  - `errors`     — map of field-name → validation error message.
+ *  - `submitting` — disables the submit button while the mailto is opening
+ *                   so a double-tap doesn't spawn two mail-app windows.
+ */
 export function Contact() {
   const [errors, setErrors] = useState<ContactErrors>({});
   const [submitting, setSubmitting] = useState(false);
 
+  /**
+   * Form submission handler.
+   *
+   * Pipeline:
+   *  1. Read raw values from the form's FormData.
+   *  2. `safeParse` against `contactSchema`. On failure, collect the first
+   *     error per field into `errors` state and abort.
+   *  3. Build a subject + body from validated data and navigate to a
+   *     `mailto:` URL. On success, reset the form and toast the user.
+   *  4. Any thrown error is caught and surfaced as a friendly toast; a
+   *     WhatsApp fallback is always visible below the form.
+   *
+   * @param e Native form submit event. `preventDefault` is called immediately
+   *          to keep the page from reloading.
+   * @returns void — the effect is side-effectful (navigation + toasts).
+   */
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (submitting) return;
