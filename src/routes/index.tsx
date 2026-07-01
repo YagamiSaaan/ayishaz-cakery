@@ -135,14 +135,19 @@ function Index() {
 
 /* ---------------- NAV ---------------- */
 function Nav({ scrolled }: { scrolled: boolean }) {
+  const [open, setOpen] = useState(false);
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [open]);
   return (
     <header
       className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
-        scrolled ? "py-3 backdrop-blur-xl bg-[rgba(27,18,13,0.7)] border-b border-[rgba(212,175,55,0.12)]" : "py-6 bg-transparent"
+        scrolled || open ? "py-3 backdrop-blur-xl bg-[rgba(27,18,13,0.85)] border-b border-[rgba(212,175,55,0.12)]" : "py-6 bg-transparent"
       }`}
     >
       <div className="max-w-[1400px] mx-auto px-6 md:px-10 flex items-center justify-between">
-        <a href="#home" className="flex flex-col leading-none">
+        <a href="#home" onClick={() => setOpen(false)} className="flex flex-col leading-none">
           <span className="font-script text-3xl text-gold-gradient">Ayishaz</span>
           <span className="text-[0.6rem] tracking-[0.4em] text-[var(--caramel)] mt-1 pl-1">CAKERY</span>
         </a>
@@ -158,15 +163,52 @@ function Nav({ scrolled }: { scrolled: boolean }) {
             </a>
           ))}
         </nav>
-        <a
-          href={WHATSAPP_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="btn-luxe btn-luxe-hover hidden md:inline-flex !py-3 !px-6 !text-[0.72rem]"
-        >
-          Order Now <ArrowRight className="w-3.5 h-3.5" />
-        </a>
+        <div className="flex items-center gap-3">
+          <a
+            href={WHATSAPP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-luxe btn-luxe-hover hidden md:inline-flex !py-3 !px-6 !text-[0.72rem]"
+          >
+            Order Now <ArrowRight className="w-3.5 h-3.5" />
+          </a>
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+            className="lg:hidden w-11 h-11 rounded-full border border-[rgba(212,175,55,0.3)] flex items-center justify-center text-cream/90 hover:bg-[var(--gold)] hover:text-[var(--espresso)] transition"
+          >
+            {open ? <X className="w-4 h-4" /> : <Plus className="w-4 h-4 rotate-45" style={{ transform: "none" }} />}
+          </button>
+        </div>
       </div>
+
+      {open && (
+        <div className="lg:hidden mt-3 border-t border-[rgba(212,175,55,0.12)]">
+          <nav className="max-w-[1400px] mx-auto px-6 md:px-10 py-6 flex flex-col gap-4">
+            {NAV.map((n) => (
+              <a
+                key={n.label}
+                href={n.href}
+                onClick={() => setOpen(false)}
+                className="text-sm tracking-[0.18em] uppercase text-cream/85 hover:text-[var(--gold)] transition py-1"
+              >
+                {n.label}
+              </a>
+            ))}
+            <a
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setOpen(false)}
+              className="btn-luxe btn-luxe-hover justify-center mt-2 !py-3 !text-[0.72rem]"
+            >
+              Order Now <ArrowRight className="w-3.5 h-3.5" />
+            </a>
+          </nav>
+        </div>
+      )}
     </header>
   );
 }
