@@ -1,3 +1,15 @@
+/**
+ * `/` — Ayishaz Cakery landing page (TanStack Start route).
+ *
+ * Composes the site's sections in scroll order and defines the page's SEO
+ * metadata: title, meta description, OpenGraph / Twitter cards, canonical
+ * URL, LCP hero preload, and a `Bakery` JSON-LD block.
+ *
+ * State ownership: each interactive section owns its own state
+ * (scroll flag → `Nav`, lightbox → `Gallery`, form → `Contact`), so this
+ * top-level component is effectively stateless and doesn't re-render as
+ * the user scrolls or opens the mobile menu.
+ */
 import { createFileRoute, Link, useRouter } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { Sparkles } from "lucide-react";
@@ -19,6 +31,8 @@ import { Contact } from "@/components/sections/Contact";
 import { Footer } from "@/components/sections/Footer";
 import { FloatingActions } from "@/components/sections/FloatingActions";
 
+// Absolute URL for the hero image — required by `og:image` / `twitter:image`
+// (relative paths get rejected by most social-card scrapers).
 const ogImageAbs = `${SITE_URL}${heroCake}`;
 
 /**
