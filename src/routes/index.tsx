@@ -837,10 +837,11 @@ function Contact() {
 }
 
 function Field({ label, type = "text", placeholder, name, required }: { label: string; type?: string; placeholder?: string; name?: string; required?: boolean }) {
+  const id = `field-${name ?? label.replace(/\s+/g, "-").toLowerCase()}`;
   return (
     <div>
-      <label className="text-[0.65rem] tracking-[0.3em] uppercase text-[var(--mocha)] mb-2 block">{label}</label>
-      <input name={name} required={required} type={type} placeholder={placeholder} className="w-full bg-transparent border-b border-[var(--mocha)]/30 py-3 focus:outline-none focus:border-[var(--gold)] placeholder:text-[var(--mocha)]/40" />
+      <label htmlFor={id} className="text-[0.65rem] tracking-[0.3em] uppercase text-[var(--mocha)] mb-2 block">{label}</label>
+      <input id={id} name={name} required={required} type={type} placeholder={placeholder} className="w-full bg-transparent border-b border-[var(--mocha)]/30 py-3 focus:outline-none focus:border-[var(--gold)] placeholder:text-[var(--mocha)]/40" />
     </div>
   );
 }
