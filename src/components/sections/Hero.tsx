@@ -24,7 +24,7 @@ export function Hero() {
     <section id="home" ref={ref} className="relative pt-32 md:pt-40 pb-24 md:pb-32 overflow-hidden">
       <HeroDecorations />
 
-      <div className="max-w-[1400px] mx-auto px-6 md:px-10 grid lg:grid-cols-[1.05fr_1fr] gap-12 lg:gap-20 items-center relative">
+      <div className="max-w-[1400px] mx-auto px-6 md:px-10 grid lg:grid-cols-[1.05fr_1fr] lg:gap-20 items-center relative">
         <motion.div style={{ y: yText }} className="relative z-10">
           <motion.div variants={fadeUp} initial="hidden" animate="show" className="eyebrow mb-6">
             <Sparkles className="w-3.5 h-3.5" aria-hidden="true" /> Premium Cakes & Desserts
