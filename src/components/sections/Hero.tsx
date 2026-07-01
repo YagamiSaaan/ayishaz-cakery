@@ -76,7 +76,7 @@ export function Hero() {
           </motion.div>
         </motion.div>
 
-        <motion.div style={{ y: yImg }} className="relative">
+        <motion.div style={{ y: yImg }} className="relative hidden lg:block">
           <HeroImage />
         </motion.div>
       </div>
