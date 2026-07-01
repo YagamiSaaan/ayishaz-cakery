@@ -35,13 +35,13 @@ export const NAV = [
 ] as const;
 
 /** Human-readable phone (spacing preserved for display in UI). */
-export const PHONE_DISPLAY = "+91 98765 43210";
+export const PHONE_DISPLAY = "+91 95449 96700";
 /** E.164-style phone for `tel:` links — must contain digits + leading `+` only. */
-export const PHONE_TEL = "+919876543210";
+export const PHONE_TEL = "+919544996700";
 
 // WhatsApp deep-link. Number is digits only (no `+`) per wa.me spec. The
 // pre-filled message is URL-encoded so any punctuation survives transport.
-const WHATSAPP_NUMBER = "919876543210";
+const WHATSAPP_NUMBER = "919544996700";
 const WHATSAPP_MESSAGE = encodeURIComponent(
   "Hi Ayishaz Cakery! I'd like to place an order. Could you share availability and pricing?"
 );
@@ -49,7 +49,7 @@ const WHATSAPP_MESSAGE = encodeURIComponent(
 export const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MESSAGE}`;
 
 /** Public inbox address (rendered as text and reused by `EMAIL_URL`). */
-export const EMAIL = "hello@ayishazcakery.com";
+export const EMAIL = "ayishazcakery@gmail.com.com";
 /** `mailto:` link with a default subject; the contact form builds a richer mailto at submit-time. */
 export const EMAIL_URL = `mailto:${EMAIL}?subject=${encodeURIComponent("Cake Enquiry")}`;
 
@@ -60,4 +60,4 @@ export const FACEBOOK_URL = "https://facebook.com/ayishazcakery";
 export const ADDRESS = "Fort Road, Kannur — Kerala, India";
 /** Google Maps search URL centered on the atelier. Opens in a new tab. */
 export const MAPS_URL =
-  "https://www.google.com/maps/search/?api=1&query=Fort+Road+Kannur+Kerala";
+  "https://maps.app.goo.gl/QrwmXcNFfZHfA7jb7";
