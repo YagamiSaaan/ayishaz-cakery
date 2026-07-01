@@ -1,20 +1,11 @@
 import { useEffect, useState } from "react";
 import { ArrowRight, Menu, X } from "lucide-react";
 import { NAV, WHATSAPP_URL } from "@/lib/site";
+import { BrandMark } from "@/components/ui/BrandMark";
 
 /**
- * Sticky top navigation.
- *
- * Owns two pieces of local UI state (kept in the leaf to avoid re-rendering
- * the whole landing page on scroll):
- *  - `scrolled` — `true` once the user has scrolled past 40px. Toggles the
- *    translucent blurred background + tighter padding. Updated inside a
- *    `requestAnimationFrame` callback and only committed when the boolean
- *    actually changes, so `setState` fires at most twice per full page scroll.
- *  - `open`     — mobile menu open/closed. While open, `body.overflow` is
- *    locked to prevent the page underneath from scrolling.
- *
- * No props. Renders a `<header>` landmark.
+ * Sticky top navigation. Owns `scrolled` + `open` locally so the rest of the
+ * landing page doesn't re-render on scroll or menu toggles.
  */
 export function Nav() {
   const [open, setOpen] = useState(false);
@@ -48,6 +39,7 @@ export function Nav() {
       document.body.style.overflow = "";
     };
   }, [open]);
+
   return (
     <header
       className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
@@ -57,11 +49,10 @@ export function Nav() {
       }`}
     >
       <div className="max-w-[1400px] mx-auto px-6 md:px-10 flex items-center justify-between">
-        <a href="#home" onClick={() => setOpen(false)} className="flex flex-col leading-none">
-          <span className="font-script text-3xl text-gold-gradient">Ayishaz</span>
-          <span className="text-[0.6rem] tracking-[0.4em] text-[var(--caramel)] mt-1 pl-1">CAKERY</span>
+        <a href="#home" onClick={() => setOpen(false)} aria-label="Ayishaz Cakery — home">
+          <BrandMark />
         </a>
-        <nav className="hidden lg:flex items-center gap-9">
+        <nav aria-label="Primary" className="hidden lg:flex items-center gap-9">
           {NAV.map((n) => (
             <a
               key={n.label}
@@ -80,7 +71,7 @@ export function Nav() {
             rel="noopener noreferrer"
             className="btn-luxe btn-luxe-hover hidden md:inline-flex !py-3 !px-6 !text-[0.72rem]"
           >
-            Order Now <ArrowRight className="w-3.5 h-3.5" />
+            Order Now <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
           </a>
           <button
             type="button"
@@ -96,7 +87,7 @@ export function Nav() {
 
       {open && (
         <div className="lg:hidden mt-3 border-t border-[rgba(212,175,55,0.12)]">
-          <nav className="max-w-[1400px] mx-auto px-6 md:px-10 py-6 flex flex-col gap-4">
+          <nav aria-label="Mobile" className="max-w-[1400px] mx-auto px-6 md:px-10 py-6 flex flex-col gap-4">
             {NAV.map((n) => (
               <a
                 key={n.label}
@@ -114,7 +105,7 @@ export function Nav() {
               onClick={() => setOpen(false)}
               className="btn-luxe btn-luxe-hover justify-center mt-2 !py-3 !text-[0.72rem]"
             >
-              Order Now <ArrowRight className="w-3.5 h-3.5" />
+              Order Now <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
             </a>
           </nav>
         </div>

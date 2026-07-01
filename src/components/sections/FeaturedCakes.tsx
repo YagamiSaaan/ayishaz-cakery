@@ -1,51 +1,38 @@
 import { motion } from "framer-motion";
 import { useRef } from "react";
-import { ArrowRight, ArrowUpRight, ChevronLeft, ChevronRight, Sparkles } from "lucide-react";
-import cakeWedding from "@/assets/cake-wedding.jpg";
-import cakeBirthday from "@/assets/cake-birthday.jpg";
-import cakeLuxury from "@/assets/cake-luxury.jpg";
-import cakeCupcakes from "@/assets/cake-cupcakes.jpg";
-import cakeMacarons from "@/assets/cake-macarons.jpg";
-import cakeDessert from "@/assets/cake-dessert.jpg";
+import { ArrowRight, ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { FEATURED_CAKES } from "@/lib/data/cakes";
+import { SectionHeader } from "@/components/ui/SectionHeader";
+import { CircleIconButton } from "@/components/ui/CircleIconButton";
 
-const CAKES = [
-  { img: cakeWedding, name: "Wedding Cakes", tag: "Elegant & Timeless", price: "From ₹25,000" },
-  { img: cakeBirthday, name: "Birthday Cakes", tag: "Make Every Wish Special", price: "From ₹3,500" },
-  { img: cakeLuxury, name: "Luxury Cakes", tag: "Opulent & Exclusive", price: "From ₹18,000" },
-  { img: cakeCupcakes, name: "Cupcakes", tag: "Sweet Little Delights", price: "From ₹150 / pc" },
-  { img: cakeMacarons, name: "Macarons", tag: "Delicate & Flavourful", price: "From ₹120 / pc" },
-  { img: cakeDessert, name: "Desserts", tag: "Indulge in Happiness", price: "From ₹550" },
-];
-
+/**
+ * Horizontal-scroll carousel of signature cakes.
+ * Owns a ref to the scroll track so left/right buttons can nudge it by ±380px.
+ */
 export function FeaturedCakes() {
   const trackRef = useRef<HTMLDivElement>(null);
-  const scroll = (dir: number) => {
-    trackRef.current?.scrollBy({ left: dir * 380, behavior: "smooth" });
-  };
+  const scroll = (dir: number) => trackRef.current?.scrollBy({ left: dir * 380, behavior: "smooth" });
 
   return (
     <section id="cakes" className="relative py-24 md:py-32">
       <div className="max-w-[1400px] mx-auto px-6 md:px-10 flex flex-wrap items-end justify-between gap-6 mb-14">
-        <div>
-          <div className="eyebrow mb-5"><Sparkles className="w-3.5 h-3.5" /> Our Signature Collection</div>
-          <h2 className="text-4xl md:text-6xl leading-[1] tracking-tight">Featured <span className="font-script italic text-gold-gradient">Cakes</span></h2>
-          <div className="gold-hairline mt-5 w-32" />
-        </div>
+        <SectionHeader eyebrow="Our Signature Collection">
+          Featured <span className="font-script italic text-gold-gradient">Cakes</span>
+          <span className="block gold-hairline mt-5 w-32" />
+        </SectionHeader>
         <div className="flex items-center gap-4">
-          <a href="#gallery" className="btn-ghost-luxe hover:bg-[rgba(212,175,55,0.08)]">View All Cakes <ArrowRight className="w-3.5 h-3.5" /></a>
+          <a href="#gallery" className="btn-ghost-luxe hover:bg-[rgba(212,175,55,0.08)]">
+            View All Cakes <ArrowRight className="w-3.5 h-3.5" />
+          </a>
           <div className="flex gap-2">
-            <button onClick={() => scroll(-1)} aria-label="Previous" className="w-11 h-11 rounded-full border border-[rgba(212,175,55,0.3)] flex items-center justify-center text-cream/80 hover:bg-[var(--gold)] hover:text-[var(--espresso)] transition">
-              <ChevronLeft className="w-4 h-4" />
-            </button>
-            <button onClick={() => scroll(1)} aria-label="Next" className="w-11 h-11 rounded-full border border-[rgba(212,175,55,0.3)] flex items-center justify-center text-cream/80 hover:bg-[var(--gold)] hover:text-[var(--espresso)] transition">
-              <ChevronRight className="w-4 h-4" />
-            </button>
+            <CircleIconButton icon={ChevronLeft} onClick={() => scroll(-1)} aria-label="Previous cake" />
+            <CircleIconButton icon={ChevronRight} onClick={() => scroll(1)} aria-label="Next cake" />
           </div>
         </div>
       </div>
 
       <div ref={trackRef} className="flex gap-6 overflow-x-auto px-6 md:px-10 pb-6 snap-x snap-mandatory">
-        {CAKES.map((c, i) => (
+        {FEATURED_CAKES.map((c, i) => (
           <motion.article
             key={c.name}
             initial={{ opacity: 0, y: 40 }}
