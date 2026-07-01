@@ -1,5 +1,5 @@
 import { createFileRoute, Link, useRouter } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Sparkles } from "lucide-react";
 
 import heroCake from "@/assets/hero-cake.jpg";
@@ -10,7 +10,6 @@ import { Hero } from "@/components/sections/Hero";
 import { About } from "@/components/sections/About";
 import { FeaturedCakes } from "@/components/sections/FeaturedCakes";
 import { Gallery } from "@/components/sections/Gallery";
-import { Lightbox } from "@/components/sections/Lightbox";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { Process } from "@/components/sections/Process";
 import { Stats } from "@/components/sections/Stats";
@@ -66,7 +65,10 @@ export const Route = createFileRoute("/")({
       { name: "twitter:description", content: "Edible art crafted for unforgettable celebrations." },
       { name: "twitter:image", content: ogImageAbs },
     ],
-    links: [{ rel: "canonical", href: `${SITE_URL}/` }],
+    links: [
+      { rel: "canonical", href: `${SITE_URL}/` },
+      { rel: "preload", as: "image", href: heroCake, fetchpriority: "high" },
+    ],
     scripts: [
       {
         type: "application/ld+json",
@@ -98,23 +100,13 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
-  const [scrolled, setScrolled] = useState(false);
-  const [lightbox, setLightbox] = useState<string | null>(null);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-clip">
-      <Nav scrolled={scrolled} />
+      <Nav />
       <Hero />
       <About />
       <FeaturedCakes />
-      <Gallery onOpen={setLightbox} />
+      <Gallery />
       <Testimonials />
       <Process />
       <Stats />
@@ -123,7 +115,6 @@ function Index() {
       <Contact />
       <Footer />
       <FloatingActions />
-      {lightbox && <Lightbox src={lightbox} onClose={() => setLightbox(null)} />}
     </div>
   );
 }
