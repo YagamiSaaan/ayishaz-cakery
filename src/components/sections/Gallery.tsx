@@ -13,14 +13,14 @@ import gallery3 from "@/assets/gallery-3.jpg";
 import gallery4 from "@/assets/gallery-4.jpg";
 
 const GALLERY = [
-  { src: gallery1, h: "tall" },
-  { src: cakeWedding, h: "med" },
-  { src: gallery2, h: "short" },
-  { src: cakeLuxury, h: "tall" },
-  { src: gallery3, h: "med" },
-  { src: cakeDessert, h: "tall" },
-  { src: gallery4, h: "med" },
-  { src: cakeMacarons, h: "short" },
+  { src: gallery1, h: "tall", alt: "Rustic naked wedding cake with fresh florals" },
+  { src: cakeWedding, h: "med", alt: "Three-tier ivory wedding cake with gold leaf accents" },
+  { src: gallery2, h: "short", alt: "Chocolate ganache drip cake with berries" },
+  { src: cakeLuxury, h: "tall", alt: "Luxury champagne-hued celebration cake" },
+  { src: gallery3, h: "med", alt: "Pastel buttercream birthday cake with sugar florals" },
+  { src: cakeDessert, h: "tall", alt: "Signature dessert box with assorted patisserie" },
+  { src: gallery4, h: "med", alt: "Bespoke sculpted cake with edible gold detailing" },
+  { src: cakeMacarons, h: "short", alt: "Tower of pastel French macarons" },
 ];
 
 /**
