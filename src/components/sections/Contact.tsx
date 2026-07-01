@@ -10,10 +10,38 @@ import {
   ADDRESS, EMAIL, EMAIL_URL, FACEBOOK_URL, INSTAGRAM_URL, MAPS_URL, PHONE_DISPLAY, PHONE_TEL, WHATSAPP_URL,
 } from "@/lib/site";
 
+/**
+ * Contact section — atelier details on the left, enquiry form on the right.
+ *
+ * The form is client-only and dispatches enquiries via a `mailto:` link (no
+ * backend). Validation is done with the shared Zod `contactSchema`; the user
+ * is guided with inline field errors + toast notifications.
+ *
+ * Local state:
+ *  - `errors`     — map of field-name → validation error message.
+ *  - `submitting` — disables the submit button while the mailto is opening
+ *                   so a double-tap doesn't spawn two mail-app windows.
+ */
 export function Contact() {
   const [errors, setErrors] = useState<ContactErrors>({});
   const [submitting, setSubmitting] = useState(false);
 
+  /**
+   * Form submission handler.
+   *
+   * Pipeline:
+   *  1. Read raw values from the form's FormData.
+   *  2. `safeParse` against `contactSchema`. On failure, collect the first
+   *     error per field into `errors` state and abort.
+   *  3. Build a subject + body from validated data and navigate to a
+   *     `mailto:` URL. On success, reset the form and toast the user.
+   *  4. Any thrown error is caught and surfaced as a friendly toast; a
+   *     WhatsApp fallback is always visible below the form.
+   *
+   * @param e Native form submit event. `preventDefault` is called immediately
+   *          to keep the page from reloading.
+   * @returns void — the effect is side-effectful (navigation + toasts).
+   */
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (submitting) return;
@@ -191,6 +219,22 @@ export function Contact() {
   );
 }
 
+/**
+ * Reusable labeled text input with inline validation UI.
+ *
+ * @param label      Human-readable label rendered above the input (also used
+ *                   to derive the DOM `id` when `name` is not supplied).
+ * @param type       HTML input `type` attribute. Defaults to `"text"`.
+ * @param placeholder Placeholder text shown in the empty input.
+ * @param name       Form field name — read by FormData in the submit handler.
+ * @param required   Adds native `required` validation on the input.
+ * @param maxLength  Hard cap on characters at the input level (mirrors the
+ *                   Zod schema's `.max()` so users can't exceed the limit).
+ * @param error      Optional validation message. When present the input is
+ *                   styled red, `aria-invalid` is set, and the message is
+ *                   linked via `aria-describedby` for screen readers.
+ * @returns A labeled input wrapped in a container `<div>`.
+ */
 function Field({
   label,
   type = "text",
@@ -208,6 +252,7 @@ function Field({
   maxLength?: number;
   error?: string;
 }) {
+  // Derive a stable DOM id so <label htmlFor> and aria-describedby line up.
   const id = `field-${name ?? label.replace(/\s+/g, "-").toLowerCase()}`;
   const errorId = error ? `${id}-error` : undefined;
   return (

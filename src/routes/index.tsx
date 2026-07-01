@@ -1,3 +1,15 @@
+/**
+ * `/` — Ayishaz Cakery landing page (TanStack Start route).
+ *
+ * Composes the site's sections in scroll order and defines the page's SEO
+ * metadata: title, meta description, OpenGraph / Twitter cards, canonical
+ * URL, LCP hero preload, and a `Bakery` JSON-LD block.
+ *
+ * State ownership: each interactive section owns its own state
+ * (scroll flag → `Nav`, lightbox → `Gallery`, form → `Contact`), so this
+ * top-level component is effectively stateless and doesn't re-render as
+ * the user scrolls or opens the mobile menu.
+ */
 import { createFileRoute, Link, useRouter } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { Sparkles } from "lucide-react";
@@ -19,8 +31,23 @@ import { Contact } from "@/components/sections/Contact";
 import { Footer } from "@/components/sections/Footer";
 import { FloatingActions } from "@/components/sections/FloatingActions";
 
+// Absolute URL for the hero image — required by `og:image` / `twitter:image`
+// (relative paths get rejected by most social-card scrapers).
 const ogImageAbs = `${SITE_URL}${heroCake}`;
 
+/**
+ * Route-level error boundary for `/`.
+ *
+ * Rendered by TanStack Router when the route's loader/component throws.
+ * Provides a branded fallback plus a "Try again" button that both
+ * invalidates the router cache (re-runs the loader) and calls `reset()`
+ * to clear the boundary.
+ *
+ * @param error TS Error thrown from the route. Logged to the console for
+ *              debugging; not shown to the user verbatim.
+ * @param reset TanStack Router callback that clears the error boundary
+ *              once the underlying issue is resolved.
+ */
 function IndexErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   const router = useRouter();
   useEffect(() => {
@@ -99,6 +126,11 @@ export const Route = createFileRoute("/")({
   errorComponent: IndexErrorComponent,
 });
 
+/**
+ * Landing page composition. Sections are declared in visual (scroll) order.
+ * `overflow-x-clip` on the outer wrapper prevents horizontal scrollbars
+ * caused by decorative absolutely-positioned motion elements.
+ */
 function Index() {
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-clip">

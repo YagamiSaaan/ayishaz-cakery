@@ -1,3 +1,15 @@
+/**
+ * Contact form validation schema.
+ *
+ * Uses Zod to validate the enquiry form on the Contact section. Each field is
+ * trimmed before validation. Optional fields accept `""` so an empty input
+ * still passes validation.
+ *
+ * Exports:
+ * - `contactSchema` — the Zod schema, used with `safeParse` in the form handler.
+ * - `ContactInput`  — TS type inferred from the schema (parsed shape).
+ * - `ContactErrors` — map of field-name → error message for inline UI display.
+ */
 import { z } from "zod";
 
 export const contactSchema = z.object({

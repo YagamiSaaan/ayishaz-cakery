@@ -23,12 +23,24 @@ const GALLERY = [
   { src: cakeMacarons, h: "short" },
 ];
 
+/**
+ * Maps a logical row-height token to a Tailwind row-span class. Hoisted out
+ * of the component body so the object identity is stable across renders.
+ */
 const HEIGHTS: Record<string, string> = {
   tall: "row-span-2",
   med: "row-span-2",
   short: "row-span-1",
 };
 
+/**
+ * Masonry-style gallery grid.
+ *
+ * Owns the lightbox state locally so opening/closing a preview does not
+ * re-render the rest of the landing page. Clicking a tile sets `lightbox`
+ * to the image src; the `<Lightbox>` component is only mounted when a src
+ * is selected and unmounts on close.
+ */
 export function Gallery() {
   const [lightbox, setLightbox] = useState<string | null>(null);
   return (
