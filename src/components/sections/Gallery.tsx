@@ -62,6 +62,7 @@ export function Gallery() {
           ))}
         </div>
       </div>
+      {lightbox && <Lightbox src={lightbox} onClose={() => setLightbox(null)} />}
     </section>
   );
 }
