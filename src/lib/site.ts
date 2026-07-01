@@ -27,7 +27,7 @@ export const BRAND = {
 export const NAV = [
   { label: "Home", href: "#home" },
   { label: "About", href: "#about" },
-  { label: "Cakes", href: "#cakes" },
+  { label: "Atelier", href: "#instagram" },
   { label: "Gallery", href: "#gallery" },
   { label: "Process", href: "#process" },
   { label: "Testimonials", href: "#testimonials" },

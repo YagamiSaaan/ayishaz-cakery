@@ -29,17 +29,25 @@ export function Hero() {
           <motion.div variants={fadeUp} initial="hidden" animate="show" className="eyebrow mb-6">
             <Sparkles className="w-3.5 h-3.5" aria-hidden="true" /> Premium Cakes & Desserts
           </motion.div>
-          <motion.h1
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.2, ease: [0.2, 0.8, 0.2, 1] }}
-            className="text-[3rem] sm:text-[4.5rem] lg:text-[5.5rem] leading-[0.95] tracking-tight"
-          >
-            Edible Art<br />
-            Crafted For<br />
-            <span className="font-script text-gold-gradient italic">Unforgettable</span><br />
-            <span className="font-script text-gold-gradient italic">Celebrations</span>
-          </motion.h1>
+          <h1 className="text-[3rem] sm:text-[4.5rem] lg:text-[5.5rem] leading-[0.95] tracking-tight">
+            {[
+              { text: "Edible Art", script: false },
+              { text: "Crafted For", script: false },
+              { text: "Unforgettable", script: true },
+              { text: "Celebrations", script: true },
+            ].map((line, i) => (
+              <span key={i} className="block overflow-hidden pb-1">
+                <motion.span
+                  initial={{ y: "110%" }}
+                  animate={{ y: "0%" }}
+                  transition={{ duration: 1, ease: [0.2, 0.8, 0.2, 1], delay: 0.15 + i * 0.12 }}
+                  className={`block ${line.script ? "font-script text-gold-gradient italic" : ""}`}
+                >
+                  {line.text}
+                </motion.span>
+              </span>
+            ))}
+          </h1>
           <motion.p variants={fadeUp} initial="hidden" animate="show" transition={{ delay: 0.3 }} className="mt-8 text-[1rem] leading-relaxed text-cream/65 max-w-md">
             An atelier of bespoke wedding cakes, luxury birthday creations, artisan chocolates and
             patisserie — each piece handcrafted with intention and the finest ingredients.
