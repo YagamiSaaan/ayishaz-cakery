@@ -179,7 +179,7 @@ function Nav({ scrolled }: { scrolled: boolean }) {
             aria-expanded={open}
             className="lg:hidden w-11 h-11 rounded-full border border-[rgba(212,175,55,0.3)] flex items-center justify-center text-cream/90 hover:bg-[var(--gold)] hover:text-[var(--espresso)] transition"
           >
-            {open ? <X className="w-4 h-4" /> : <Plus className="w-4 h-4 rotate-45" style={{ transform: "none" }} />}
+            {open ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
           </button>
         </div>
       </div>
