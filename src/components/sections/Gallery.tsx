@@ -13,14 +13,14 @@ import gallery3 from "@/assets/gallery-3.jpg";
 import gallery4 from "@/assets/gallery-4.jpg";
 
 const GALLERY = [
-  { src: gallery1, h: "tall" },
-  { src: cakeWedding, h: "med" },
-  { src: gallery2, h: "short" },
-  { src: cakeLuxury, h: "tall" },
-  { src: gallery3, h: "med" },
-  { src: cakeDessert, h: "tall" },
-  { src: gallery4, h: "med" },
-  { src: cakeMacarons, h: "short" },
+  { src: gallery1, h: "tall", alt: "Rustic naked wedding cake with fresh florals" },
+  { src: cakeWedding, h: "med", alt: "Three-tier ivory wedding cake with gold leaf accents" },
+  { src: gallery2, h: "short", alt: "Chocolate ganache drip cake with berries" },
+  { src: cakeLuxury, h: "tall", alt: "Luxury champagne-hued celebration cake" },
+  { src: gallery3, h: "med", alt: "Pastel buttercream birthday cake with sugar florals" },
+  { src: cakeDessert, h: "tall", alt: "Signature dessert box with assorted patisserie" },
+  { src: gallery4, h: "med", alt: "Bespoke sculpted cake with edible gold detailing" },
+  { src: cakeMacarons, h: "short", alt: "Tower of pastel French macarons" },
 ];
 
 /**
@@ -63,7 +63,7 @@ export function Gallery() {
               transition={{ duration: 0.7, delay: (i % 4) * 0.08 }}
               className={`relative overflow-hidden rounded-3xl group ${HEIGHTS[g.h]}`}
             >
-              <img src={g.src} alt="" loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1500ms] group-hover:scale-110" />
+              <img src={g.src} alt={g.alt} loading="lazy" decoding="async" className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1500ms] group-hover:scale-110" />
               <div className="absolute inset-0 bg-[var(--espresso)]/0 group-hover:bg-[var(--espresso)]/40 transition-colors" />
               <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
                 <div className="w-12 h-12 rounded-full bg-[var(--cream)] flex items-center justify-center">

@@ -15,7 +15,8 @@ import { useEffect } from "react";
 import { Sparkles } from "lucide-react";
 
 import heroCake from "@/assets/hero-cake.jpg";
-import { SITE_URL, INSTAGRAM_URL, FACEBOOK_URL } from "@/lib/site";
+import { SITE_URL, INSTAGRAM_URL, FACEBOOK_URL, PHONE_TEL } from "@/lib/site";
+import { FAQS } from "@/lib/faqs";
 
 import { Nav } from "@/components/sections/Nav";
 import { Hero } from "@/components/sections/Hero";
@@ -106,18 +107,47 @@ export const Route = createFileRoute("/")({
           image: ogImageAbs,
           "@id": `${SITE_URL}/`,
           url: `${SITE_URL}/`,
-          telephone: "+91-98765-43210",
+          telephone: PHONE_TEL,
           priceRange: "₹₹₹",
+          servesCuisine: ["Cakes", "Desserts", "Patisserie"],
           address: {
             "@type": "PostalAddress",
             streetAddress: "Fort Road",
             addressLocality: "Kannur",
             addressRegion: "Kerala",
+            postalCode: "670001",
             addressCountry: "IN",
           },
           geo: { "@type": "GeoCoordinates", latitude: 11.870, longitude: 75.370 },
           openingHours: "Tu-Su 10:00-20:00",
           sameAs: [INSTAGRAM_URL, FACEBOOK_URL],
+          aggregateRating: {
+            "@type": "AggregateRating",
+            ratingValue: "4.9",
+            reviewCount: "2000",
+          },
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: FAQS.map((f) => ({
+            "@type": "Question",
+            name: f.q,
+            acceptedAnswer: { "@type": "Answer", text: f.a },
+          })),
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: `${SITE_URL}/` },
+          ],
         }),
       },
     ],
@@ -135,16 +165,18 @@ function Index() {
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-clip">
       <Nav />
-      <Hero />
-      <About />
-      <FeaturedCakes />
-      <Gallery />
-      <Testimonials />
-      <Process />
-      <Stats />
-      <InstagramFeed />
-      <FAQ />
-      <Contact />
+      <main id="main">
+        <Hero />
+        <About />
+        <FeaturedCakes />
+        <Gallery />
+        <Testimonials />
+        <Process />
+        <Stats />
+        <InstagramFeed />
+        <FAQ />
+        <Contact />
+      </main>
       <Footer />
       <FloatingActions />
     </div>

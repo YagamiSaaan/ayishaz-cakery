@@ -83,7 +83,7 @@ export function Hero() {
             transition={{ delay: 0.7 }}
             className="mt-14 flex items-center gap-10"
           >
-            <div className="flex -space-x-3">
+            <div className="flex -space-x-3" aria-hidden="true">
               {[gallery1, cakeMacarons, cakeWedding].map((src, i) => (
                 <div key={i} className="w-11 h-11 rounded-full border-2 border-[var(--espresso)] overflow-hidden">
                   <img src={src} alt="" className="w-full h-full object-cover" />

@@ -2,23 +2,16 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { Minus, Plus, Sparkles } from "lucide-react";
 import { fadeUp } from "./shared";
-
-const FAQS = [
-  { q: "How far in advance should I order?", a: "For wedding cakes we recommend 4–6 weeks. Bespoke birthday cakes need 7–10 days; smaller orders can often be accommodated within 48 hours." },
-  { q: "Do you offer eggless and dietary options?", a: "Yes — eggless, gluten-conscious and vegan recipes are available across the menu, with no compromise on flavour or finish." },
-  { q: "Do you deliver across Kerala?", a: "We deliver across Kannur, Thalassery, Kozhikode and most of north Kerala. Larger tiered cakes are hand-delivered and assembled on-site by our team." },
-  { q: "Can I commission a fully custom design?", a: "Every cake we make is custom. Bring a mood board, a fabric swatch, a memory — we'll translate it into edible form." },
-  { q: "What is your pricing structure?", a: "Pricing depends on size, complexity and finish. After a brief consultation we provide a detailed quotation with no hidden costs." },
-];
+import { FAQS } from "@/lib/faqs";
 
 export function FAQ() {
   const [open, setOpen] = useState<number>(0);
   return (
-    <section className="relative py-24 md:py-32 px-6 md:px-10">
+    <section id="faq" aria-labelledby="faq-heading" className="relative py-24 md:py-32 px-6 md:px-10">
       <div className="max-w-[1100px] mx-auto">
         <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }} className="text-center mb-14">
           <div className="eyebrow justify-center mb-5"><Sparkles className="w-3.5 h-3.5" /> Frequently Asked</div>
-          <h2 className="text-4xl md:text-6xl leading-[1.05]">Questions, <span className="font-script italic text-gold-gradient">Answered</span></h2>
+          <h2 id="faq-heading" className="text-4xl md:text-6xl leading-[1.05]">Questions, <span className="font-script italic text-gold-gradient">Answered</span></h2>
         </motion.div>
         <div className="divide-y divide-[rgba(212,175,55,0.15)] border-y border-[rgba(212,175,55,0.15)]">
           {FAQS.map((f, i) => (
