@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://creme-artisan-bakes.lovable.app/sitemap.xml
+Sitemap: https://ayishaz-cakery.lovable.app/sitemap.xml
